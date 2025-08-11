@@ -1,1 +1,5 @@
-<h1>Список событий</h1>
+<script>
+	import EventsListPage from "../../components/ui/EventsListPage/EventsListPage.svelte";
+</script>
+
+<EventsListPage />
