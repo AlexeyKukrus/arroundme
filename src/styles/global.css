@@ -1,0 +1,25 @@
+:root {
+	--color-bg: #ffffff;
+	--color-text: #1a1a1a;
+	--color-primary: #0070f3;
+	--color-border: #dee2e6;
+	--color-midnight: #000957;
+	--color-error: #e71607;
+
+	--font-body: 'Inter', sans-serif;
+	--font-heading: 'Inter', sans-serif;
+	--border-radius: 8px;
+	--header-height: 56px;
+	--sidebar-width: 80px;
+}
+
+.border {
+	border: 1px solid var(--color-border);
+	border-radius: var(--border-radius);
+}
+.error-message {
+	color: var(--color-error);
+	margin: 1rem 0;
+	text-align: center;
+	font-size: 0.875rem;
+}
