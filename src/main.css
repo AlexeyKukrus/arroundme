@@ -1,5 +1,6 @@
 @import './styles/global.css';
 @import './styles/layout/auth-modal.css';
+@import './styles/layout/navigation.css';
 
 * {
 	box-sizing: border-box;
