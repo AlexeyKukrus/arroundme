@@ -1,6 +1,6 @@
 <script lang="ts">
 	// ActionButton
-	
+
 	export let onCancel: () => void;
 	export let submitLabel: string = 'Сохранить';
 </script>

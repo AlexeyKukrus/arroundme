@@ -35,19 +35,17 @@
 </script>
 
 <div class="events-list-page">
-  
-    <EventsMap {events} />
+	<EventsMap {events} />
 
-
-  {#if !loading && events.length}
-    <div class={isMobile ? 'events-mobile-list' : 'events-desktop-list'}>
-      <div class="events-wrapper">
-        {#each events as item}
-          <EventCard {item} />
-        {/each}
-      </div>
-    </div>
-  {:else if !loading}
-    <div class="empty-message">Событий не найдено</div>
-  {/if}
+	{#if !loading && events.length}
+		<div class={isMobile ? 'events-mobile-list' : 'events-desktop-list'}>
+			<div class="events-wrapper">
+				{#each events as item}
+					<EventCard {item} />
+				{/each}
+			</div>
+		</div>
+	{:else if !loading}
+		<div class="empty-message">Событий не найдено</div>
+	{/if}
 </div>

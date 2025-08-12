@@ -1,6 +1,6 @@
 <script lang="ts">
 	// EventForm
-	
+
 	import ActionButton from '../../../primitive/ActionButton.svelte';
 	import FormField from '../../../primitive/FormField.svelte';
 

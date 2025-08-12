@@ -1,8 +1,8 @@
 <script lang="ts">
 	// EventsMap
-	
+
 	import { onMount } from 'svelte';
-	import type { Event } from '$lib/types/event'
+	import type { Event } from '$lib/types/event';
 
 	export let events: Event[] = [];
 

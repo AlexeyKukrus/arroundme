@@ -1,6 +1,6 @@
 <script lang="ts">
 	// FormField
-	
+
 	export let label: string;
 	export let type: 'text' | 'textarea' | 'datetime-local' = 'text';
 	export let value: string;
