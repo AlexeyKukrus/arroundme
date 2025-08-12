@@ -1,1 +1,5 @@
-<h1>Форма создания события</h1>
+<script>
+	import EventFormPage from '../../../components/ui/EventFormPage/EventFormPage.svelte';
+</script>
+
+<EventFormPage />

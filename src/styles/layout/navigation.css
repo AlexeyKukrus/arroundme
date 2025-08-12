@@ -70,7 +70,7 @@
 	transition:
 		opacity 0.3s ease,
 		visibility 0.3s ease;
-	z-index: 99;
+	z-index: 150;
 }
 
 .overlay.visible {
@@ -88,7 +88,7 @@
 	background: var(--color-bg);
 	transform: translateX(-100%);
 	transition: transform 0.3s ease;
-	z-index: 100;
+	z-index: 150;
 	padding: 1rem;
 }
 

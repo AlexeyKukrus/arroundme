@@ -1,4 +1,5 @@
 <script lang="ts">
+	// AuthFormModal
 	import { goto } from '$app/navigation';
 	import { showAuthModal, isAuthenticated } from '$lib/stores/auth';
 
@@ -11,17 +12,12 @@
 
 		if (email === 'test@test.ru' && password === 'test') {
 			isAuthenticated.set(true);
-			showAuthModal.set(false); // Используем хранилище вместо локального состояния
+			showAuthModal.set(false);
 			errorMessage = '';
-			// Дополнительно можно сохранить токен
 			localStorage.setItem('auth-token', 'dummy-token');
 		} else {
 			errorMessage = 'Неверный email или пароль';
 		}
-	};
-
-	const closeModal = () => {
-		showAuthModal.set(false);
 	};
 </script>
 
