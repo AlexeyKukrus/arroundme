@@ -1,50 +1,57 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+	// EventsMap
+	
+	import { onMount } from 'svelte';
+	import type { Event } from '$lib/types/event'
 
-  let mapContainer: HTMLDivElement;
+	export let events: Event[] = [];
 
-  onMount(() => {
-    // Загружаем скрипт Яндекс.Карт
-    const script = document.createElement('script');
-    script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU';
-    script.type = 'text/javascript';
-    script.onload = initMap;
-    document.head.appendChild(script);
-  });
+	let mapContainer: HTMLDivElement;
+	function parseCoordinates(coordString: string) {
+		return coordString.split('|').map(Number);
+	}
 
-  function initMap() {
-    // @ts-ignore
-    ymaps.ready(() => {
-      // @ts-ignore
-      const map = new ymaps.Map(mapContainer, {
-        center: [55.751244, 37.618423], // Москва
-        zoom: 10,
-        controls: ['zoomControl']
-      });
+	function initMap() {
+		let placemark: Number[] = [];
+		// @ts-ignore
+		ymaps.ready(() => {
+			// @ts-ignore
+			const map = new ymaps.Map(mapContainer, {
+				center: [55.751244, 37.618423], // Москва
+				zoom: 10,
+				controls: ['zoomControl']
+			});
 
-      // Пример метки
-      // @ts-ignore
-      const placemark = new ymaps.Placemark(
-        [55.751244, 37.618423],
-        { balloonContent: 'Привет, это Москва!' },
-        { preset: 'islands#redIcon' }
-      );
+			events.map((item) => {
+				placemark = new ymaps.Placemark(
+					parseCoordinates(item.coordinates),
+					{ balloonContent: 'Привет, это Москва!' },
+					{ preset: 'islands#redIcon' }
+				);
+				map.geoObjects.add(placemark);
+			});
 
-      map.geoObjects.add(placemark);
+			// Пример: событие при изменении границ карты
+			map.events.add('boundschange', () => {
+				console.log('Новая область карты:', map.getBounds());
+			});
+		});
+	}
 
-      // Пример: событие при изменении границ карты
-      map.events.add('boundschange', () => {
-        console.log('Новая область карты:', map.getBounds());
-      });
-    });
-  }
+	onMount(() => {
+		const script = document.createElement('script');
+		script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU';
+		script.type = 'text/javascript';
+		script.onload = initMap;
+		document.head.appendChild(script);
+	});
 </script>
 
-<style>
-  .map {
-    width: 100%;
-    height: 400px;
-  }
-</style>
-
 <div bind:this={mapContainer} class="map"></div>
+
+<style>
+	.map {
+		width: 100%;
+		height: 400px;
+	}
+</style>

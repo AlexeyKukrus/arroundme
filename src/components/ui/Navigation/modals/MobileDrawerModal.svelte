@@ -1,5 +1,5 @@
 <script lang="ts">
-	// MobileDrawer
+	// MobileDrawerModal
 	import { page } from '$app/stores';
 	import { navigationTabsList } from '../helpers/helper-options';
 

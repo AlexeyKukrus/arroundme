@@ -1,5 +1,5 @@
 <script>
-	import EventFormPage from "../../../components/ui/EventFormPage/EventFormPage.svelte";
-
+	import EventFormPage from '../../../components/ui/EventFormPage/EventFormPage.svelte';
 </script>
+
 <EventFormPage />
