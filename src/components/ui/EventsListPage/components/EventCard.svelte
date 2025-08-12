@@ -3,8 +3,23 @@
 	import { goto } from '$app/navigation';
 	import type { Event } from '$lib/types/event';
 	import { handlers } from 'svelte/legacy';
-	export let item: Event = {};
+	import { truncateString } from '../../../../helpers/helpers';
 
+	export let item: Event = {
+		name: '',
+		description: '',
+		address: ''
+	};
+
+	let title: string = '';
+	let description: string = '';
+	let address: string = '';
+
+	$: {
+		title = truncateString(item.name, 25) || '';
+		description = truncateString(item.description, 70) || '';
+		address = truncateString(item.address, 40) || '';
+	}
 	const handleClick = () => {
 		goto(`/event/${item.id}/view`);
 	};
@@ -15,17 +30,17 @@
 <div class="event-card" on:click={handleClick}>
 	<img src={'event.jpg'} alt={item.name} class="event-image" />
 	<div class="event-card-content">
-		<h3>{item.name}</h3>
+		<h3>{title}</h3>
 		{#if item.scheduledFor}
 			<div class="event-date">
 				{new Date(item.scheduledFor).toLocaleDateString()}
 			</div>
 		{/if}
 		{#if item.address}
-			<div class="event-location">📍 {item.address}</div>
+			<div class="event-location">📍 {address}</div>
 		{/if}
 		{#if item.description}
-			<p class="event-description">{item.description}</p>
+			<p class="event-description">{description}</p>
 		{/if}
 	</div>
 </div>

@@ -1,21 +1,22 @@
 <script lang="ts">
-	// EventForm
-
 	import ActionButton from '../../../primitive/ActionButton.svelte';
 	import FormField from '../../../primitive/FormField.svelte';
-
 	import { createEventDispatcher } from 'svelte';
+
+	export let initialData: {
+		name: string;
+		address: string;
+		coordinates: string;
+		scheduledFor: string;
+		description: string;
+		activityType: string;
+	};
+
+	export let isEditMode = false;
 
 	const dispatch = createEventDispatcher();
 
-	let formData = {
-		name: '',
-		address: '',
-		coordinates: '',
-		scheduledFor: '',
-		description: '',
-		activityType: 'party'
-	};
+	let formData = initialData;
 
 	const handleSubmit = (e: Event) => {
 		e.preventDefault();
@@ -23,14 +24,7 @@
 	};
 
 	const resetForm = () => {
-		formData = {
-			name: '',
-			address: '',
-			coordinates: '',
-			scheduledFor: '',
-			description: '',
-			activityType: 'party'
-		};
+		formData = initialData;
 	};
 </script>
 
@@ -60,7 +54,7 @@
 		placeholder="Введите описание"
 	/>
 
-	<ActionButton onCancel={resetForm} submitLabel="Создать" />
+	<ActionButton onCancel={resetForm} submitLabel={isEditMode ? 'Сохранить' : 'Создать'} />
 </form>
 
 <style>
