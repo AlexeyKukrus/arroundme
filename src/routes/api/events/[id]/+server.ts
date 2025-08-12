@@ -1,0 +1,21 @@
+import { fetchFromServer } from "../../../../helpers/fetch";
+import { processApiResponse } from "../../../../helpers/api-response-helpers";
+import type { RequestHandler } from "./$types";
+
+export const GET: RequestHandler = async (params) => {
+    const id = params.params.id;
+    const { cookies, fetch, request } = params;
+    
+    const response = await fetchFromServer(`events/${id}`, {
+        cookies,
+        fetch,
+        request,
+    });
+
+    const jsonData = await processApiResponse(response);
+    const data = jsonData.data;
+    const item = data.item;
+    console.log(data)
+    
+    return item;
+};
