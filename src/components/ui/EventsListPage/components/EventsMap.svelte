@@ -48,10 +48,3 @@
 </script>
 
 <div bind:this={mapContainer} class="map"></div>
-
-<style>
-	.map {
-		width: 100%;
-		height: 400px;
-	}
-</style>
