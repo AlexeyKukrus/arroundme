@@ -1,16 +1,15 @@
+import { fetchFromServer } from '../../../helpers/fetch';
+import { processApiResponse } from '../../../helpers/api-response-helpers';
 import { json } from '@sveltejs/kit';
 
-export async function GET() {
-	try {
-		const response = await fetch('https://aroundme.space/api/v1/events');
-		if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-		const data = await response.json();
-		return json(data);
-	} catch (error) {
-		if (error instanceof Error) {
-			return json({ error: error.message }, { status: 500 });
-		}
+export async function GET({ url, cookies, fetch, request }) {
+	const response = await fetchFromServer(`events`, {
+		cookies,
+		fetch,
+		request
+	});
 
-		return json({ error: 'Unknown error occurred' }, { status: 500 });
-	}
+	const jsonData = await processApiResponse(response);
+
+	return json(jsonData);
 }

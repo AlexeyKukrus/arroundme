@@ -1,1 +1,4 @@
-<h1>Страница прсмотра события</h1>
+<script lang="ts">
+	import EventViewPage from "../../../../components/ui/EventViewPage/EventViewPage.svelte";
+</script>
+<EventViewPage />

@@ -5,22 +5,16 @@
 	import type { Event } from '$lib/types/event';
 	import EventsMap from './components/EventsMap.svelte';
 	import EventCard from './components/EventCard.svelte';
+	import { getEventsListMethod } from '../../../routes/api/events/methods';
 
 	let events: Event[] = [];
 	let isMobile = false;
-	let loading = true;
+	let loading = false;
 
-	const getEventsList = async () => {
-		loading = true;
-		try {
-			const response = await fetch('/api/events');
-			if (!response.ok) throw new Error('Ошибка загрузки');
-			events = (await response.json()).events || [];
-		} catch (err) {
-			console.error('Ошибка:', err);
-		} finally {
-			loading = false;
-		}
+	const getEventsList = () => {
+		getEventsListMethod().then((res) => {
+			events = res.events;
+		});
 	};
 
 	onMount(() => {

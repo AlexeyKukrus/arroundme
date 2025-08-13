@@ -25,7 +25,7 @@
 			events.map((item) => {
 				placemark = new ymaps.Placemark(
 					parseCoordinates(item.coordinates),
-					{ balloonContent: 'Привет, это Москва!' },
+					{ balloonContent: item.name },
 					{ preset: 'islands#redIcon' }
 				);
 				map.geoObjects.add(placemark);

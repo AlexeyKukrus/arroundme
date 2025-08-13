@@ -1,11 +1,11 @@
 export interface Event {
 	activityType?: string;
-	address?: string;
+	address: string;
 	coordinates?: string;
 	createdAt?: string;
-	description?: string;
+	description: string;
 	id?: string;
-	name?: string;
+	name: string;
 	scheduledFor?: string;
 	updatedAt?: string;
 }
