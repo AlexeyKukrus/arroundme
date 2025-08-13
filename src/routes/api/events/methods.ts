@@ -13,7 +13,7 @@ export const getEventsListMethod = async () => {
 };
 
 export const getEventByIdMethod = async (id: string): Promise<Event> => {
-    const response = await fetchFromClient("GET", `events/${id}`);
+    const response = await fetchFromClient("GET", `/api/events/${id}`);
     
     if (!response.ok) {
         throw new Error(`Failed to fetch event: ${response.status}`);

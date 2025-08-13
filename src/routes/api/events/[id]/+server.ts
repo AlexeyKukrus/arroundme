@@ -13,9 +13,6 @@ export const GET: RequestHandler = async (params) => {
     });
 
     const jsonData = await processApiResponse(response);
-    const data = jsonData.data;
-    const item = data.item;
-    console.log(data)
     
-    return item;
+    return jsonData;
 };
