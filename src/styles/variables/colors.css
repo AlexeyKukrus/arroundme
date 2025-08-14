@@ -1,0 +1,66 @@
+.event-type-concerts {
+	background-color: var(--event-concerts);
+}
+.event-type-party {
+	background-color: var(--event-party);
+}
+.event-type-business {
+	background-color: var(--event-business);
+}
+.event-type-it_internet {
+	background-color: var(--event-it_internet);
+}
+.event-type-exhibitions {
+	background-color: var(--event-exhibitions);
+}
+.event-type-cinema {
+	background-color: var(--event-cinema);
+}
+.event-type-food {
+	background-color: var(--event-food);
+}
+.event-type-education {
+	background-color: var(--event-education);
+}
+.event-type-art_culture {
+	background-color: var(--event-art_culture);
+}
+.event-type-for_children {
+	background-color: var(--event-for_children);
+}
+.event-type-psychology {
+	background-color: var(--event-psychology);
+}
+.event-type-other_events {
+	background-color: var(--event-other_events);
+}
+.event-type-intellectual_games {
+	background-color: var(--event-intellectual_games);
+}
+.event-type-languages {
+	background-color: var(--event-languages);
+}
+.event-type-tours_travel {
+	background-color: var(--event-tours_travel);
+}
+.event-type-theaters {
+	background-color: var(--event-theaters);
+}
+.event-type-science {
+	background-color: var(--event-science);
+}
+.event-type-sports {
+	background-color: var(--event-sports);
+}
+.event-type-hobbies {
+	background-color: var(--event-hobbies);
+}
+.event-type-beauty_health {
+	background-color: var(--event-beauty_health);
+}
+.event-type-civic_projects {
+	background-color: var(--event-civic_projects);
+}
+.event-type-master_class {
+	background-color: var(--event-master_class);
+}

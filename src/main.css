@@ -4,6 +4,9 @@
 @import './styles/layout/events-list.css';
 @import './styles/layout/event-view.css';
 
+@import './styles/variables/colors.css';
+@import './styles/variables/margin.css';
+
 * {
 	box-sizing: border-box;
 	margin: 0;

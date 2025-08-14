@@ -13,3 +13,9 @@ export async function GET({ url, cookies, fetch, request }) {
 
 	return json(jsonData);
 }
+
+export async function POST(params) {
+	const response = await fetchFromServer('events', params);
+	const jsonData = await processApiResponse(response);
+	return json(jsonData);
+}

@@ -17,9 +17,6 @@
 			<input {type} bind:value {placeholder} {required} class="input" />
 		{/if}
 	</label>
-	{#if value && required}
-		<span class="checkmark">✅</span>
-	{/if}
 </div>
 
 <style>
@@ -44,15 +41,14 @@
 		font-size: 1rem;
 	}
 
+	.input:focus {
+		outline: none;
+		border-color: #42b983;
+		box-shadow: 0 0 0 2px rgba(66, 185, 131, 0.2);
+	}
+
 	textarea.input {
 		min-height: 100px;
 		resize: vertical;
-	}
-
-	.checkmark {
-		position: absolute;
-		right: 10px;
-		top: 40px;
-		color: #4caf50;
 	}
 </style>

@@ -20,7 +20,7 @@
 	onMount(() => {
 		getEventsList();
 		if (browser) {
-			const checkMobile = () => (isMobile = window.matchMedia('(max-width: 1024px)').matches);
+			const checkMobile = () => (isMobile = window.matchMedia('(max-width: 1376px)').matches);
 			checkMobile();
 			window.addEventListener('resize', checkMobile);
 			return () => window.removeEventListener('resize', checkMobile);

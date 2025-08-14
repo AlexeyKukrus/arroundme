@@ -1,19 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b9df272-ac59-404d-baa7-da0e5b392159" name="Changes" comment="" />
+    <list default="true" id="1b9df272-ac59-404d-baa7-da0e5b392159" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/primitive/Select.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ui/EventFormPage/helpers/helpers-options.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/helpers/helpers-data-options.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/helpers/validation-helpers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/variables/colors.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/variables/margin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/primitive/ActionButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/primitive/ActionButton.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/primitive/FormField.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/primitive/FormField.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/EventFormPage/EventFormPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/EventFormPage/EventFormPage.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/EventFormPage/components/EventForm.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/EventFormPage/components/EventForm.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/EventViewPage/EventViewPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/EventViewPage/EventViewPage.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/EventsListPage/EventsListPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/EventsListPage/EventsListPage.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/EventsListPage/components/EventCard.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/EventsListPage/components/EventCard.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/EventsListPage/components/EventsMap.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/EventsListPage/components/EventsMap.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/api-response-helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/api-response-helpers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/fetch.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/fetch.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/helpers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/types/event.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/event.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/http-error-model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/http-error-model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/api/events/+server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/events/+server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/api/events/[id]/+server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/events/[id]/+server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/api/events/[id]/methods.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/events/[id]/methods.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/api/events/methods.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/events/methods.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/event/[id]/edit/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/event/[id]/edit/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/event/[id]/view/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/event/[id]/view/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/event/create/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/event/create/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/global.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/layout/event-view.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/layout/event-view.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/layout/events-list.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/layout/events-list.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/layout/navigation.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/layout/navigation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/event.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/event.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/svelte.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/svelte.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Select" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="31AfcB5lLAWJ2VsOVMy8lI14r9p" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -22,11 +71,37 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "ME-0003",
+    "git-widget-placeholder": "ME-0005",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "npm.dev.executor": "Run",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\test8\\Desktop\\arroundme\\node_modules\\prettier",
+    "ts.external.directory.path": "C:\\Users\\test8\\Desktop\\arroundme\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs>
+        <env name="NODE_EXTRA_CA_CERTS" value="C:\Users\test8\Downloads\caddy-root.crt" />
+      </envs>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -43,7 +118,11 @@
       <option name="presentableId" value="Default" />
       <updated>1754971876316</updated>
       <workItem from="1754971878497" duration="7000" />
+      <workItem from="1755156078708" duration="29361000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>
