@@ -1,10 +1,40 @@
 :root {
-	--color-bg: #ffffff;
+	--color-white: #ffffff;
 	--color-text: #1a1a1a;
 	--color-primary: #0070f3;
 	--color-border: #dee2e6;
 	--color-midnight: #000957;
 	--color-error: #e71607;
+	--color-gray-900: #333333;
+	--color-gray-300: #dddddd;
+	--color-gray-100: #f5f5f5;
+	--color-green-500: #4caf50;
+	--color-green-700: #3e8e41;
+	--color-action-success: #42b983;
+
+	/* Цвета событий*/
+	--event-concerts: #ab47bc;
+	--event-party: #ff7043;
+	--event-business: #42a5f5;
+	--event-it_internet: #26a69a;
+	--event-exhibitions: #ffca28;
+	--event-cinema: #ef5350;
+	--event-food: #66bb6a;
+	--event-education: #5c6bc0;
+	--event-art_culture: #7e57c2;
+	--event-for_children: #29b6f6;
+	--event-psychology: #26c6da;
+	--event-other_events: #bdbdbd;
+	--event-intellectual_games: #8e24aa;
+	--event-languages: #ffa726;
+	--event-tours_travel: #9ccc65;
+	--event-theaters: #e53935;
+	--event-science: #0288d1;
+	--event-sports: #43a047;
+	--event-hobbies: #f48fb1;
+	--event-beauty_health: #f06292;
+	--event-civic_projects: #8d6e63;
+	--event-master_class: #ff8a65;
 
 	--font-body: 'Inter', sans-serif;
 	--font-heading: 'Inter', sans-serif;

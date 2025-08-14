@@ -1,30 +1,32 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import EventForm from './components/EventForm.svelte';
+	import { onMount } from 'svelte';
+	import { getEventByIdMethod } from '../../../routes/api/events/[id]/methods';
+	import { page } from '$app/stores';
 
-	const handleSubmit = async (eventData: any) => {
-		try {
-			const response = await fetch('https://aroundme.space/api/v1/events', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(eventData)
+	export let mode: string = 'create';
+
+	let eventId = $page.params.id || '';
+	let event = {};
+	let title = 'СОЗДАТЬ НОВОЕ СОБЫТИЕ';
+	let isEditMode = false;
+
+	$: title = mode === 'create' ? 'СОЗДАТЬ СОБЫТИЕ' : 'РЕДАКТИРОВАТЬ СОБЫТИЕ';
+	$: isEditMode = mode === 'edit';
+
+	onMount(() => {
+		if (mode === 'edit') {
+			getEventByIdMethod(eventId).then((res) => {
+				event = res.event || {};
+				event.id = eventId;
 			});
-
-			if (!response.ok) throw new Error('Ошибка создания события');
-
-			await goto('/events');
-		} catch (error) {
-			console.error('Ошибка:', error);
-			alert('Не удалось создать событие');
 		}
-	};
+	});
 </script>
 
 <div class="create-event-page">
-	<h1>СОЗДАТЬ СОБЫТИЕ</h1>
-	<EventForm on:submit={handleSubmit} />
+	<h1>{title}</h1>
+	<EventForm data={event} {isEditMode} on:submitForm />
 </div>
 
 <style>

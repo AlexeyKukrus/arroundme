@@ -1,60 +1,117 @@
 <script lang="ts">
+	// EventForm
+	import { goto } from '$app/navigation';
+	import { createEventDispatcher } from 'svelte';
+	import { formatISOtoString, formatStringToISOString } from '../../../../helpers/helpers.js';
+	import { eventTypesListOptions } from '../helpers/helpers-options';
+	import Select from '../../../primitive/Select.svelte';
 	import ActionButton from '../../../primitive/ActionButton.svelte';
 	import FormField from '../../../primitive/FormField.svelte';
-	import { createEventDispatcher } from 'svelte';
 
-	export let initialData: {
-		name: string;
-		address: string;
-		coordinates: string;
-		scheduledFor: string;
-		description: string;
-		activityType: string;
+	export let data = {
+		name: '',
+		address: '',
+		activityType: '',
+		description: '',
+		coordinates: '',
+		scheduledFor: ''
 	};
-
-	export let isEditMode = false;
+	export let isEditMode: boolean = false;
 
 	const dispatch = createEventDispatcher();
 
-	let formData = initialData;
+	let formData = {};
+	let selectedEventName = '';
+	let selectedEventAddress = '';
+	let selectedEventData = '';
+	let selectedEventDescription = '';
+	let selectedEventType: string[] = [];
 
-	const handleSubmit = (e: Event) => {
+	$: {
+		selectedEventName = data.name || '';
+		selectedEventAddress = data.address || '';
+		selectedEventDescription = data.description || '';
+
+		if (data.scheduledFor) {
+			selectedEventData = formatISOtoString(data.scheduledFor) || '';
+		}
+
+		if (data.activityType) {
+			selectedEventType = [data.activityType];
+		}
+	}
+
+	const submitForm = (e: Event) => {
 		e.preventDefault();
-		dispatch('submit', formData);
+
+		formData = {
+			name: selectedEventName || '',
+			address: selectedEventAddress || '',
+			scheduledFor: formatStringToISOString(selectedEventData) || '',
+			description: selectedEventDescription || '',
+			activityType: selectedEventType[0] || null,
+			coordinates: '55.752004|37.617734'
+		};
+
+		if (isEditMode) {
+			formData.id = data.id;
+		}
+		dispatch('submitForm', formData);
 	};
 
+	const changeEventType = (e) => {
+		selectedEventType = [e.detail];
+	};
 	const resetForm = () => {
-		formData = initialData;
+		formData = {};
+		selectedEventName = '';
+		selectedEventAddress = '';
+		selectedEventData = '';
+		selectedEventDescription = '';
+		selectedEventType = [];
+
+		goto('/events');
 	};
 </script>
 
-<form on:submit={handleSubmit}>
+<form on:submit={submitForm}>
 	<FormField
-		label="Место"
+		label="Событие"
 		type="text"
-		bind:value={formData.name}
-		placeholder="Введите название места"
+		bind:value={selectedEventName}
+		placeholder="Введите название события"
 		required
 	/>
 
 	<FormField
 		label="Адрес"
 		type="text"
-		bind:value={formData.address}
+		bind:value={selectedEventAddress}
 		placeholder="Введите адрес"
 		required
 	/>
 
-	<FormField label="Дата" type="datetime-local" bind:value={formData.scheduledFor} required />
+	<FormField label="Дата" type="datetime-local" bind:value={selectedEventData} required />
+
+	<Select
+		options={eventTypesListOptions}
+		bind:selected={selectedEventType}
+		placeholder="Выберите тип события"
+		on:change={changeEventType}
+	/>
 
 	<FormField
 		label="Описание"
 		type="textarea"
-		bind:value={formData.description}
+		bind:value={selectedEventDescription}
 		placeholder="Введите описание"
 	/>
 
-	<ActionButton onCancel={resetForm} submitLabel={isEditMode ? 'Сохранить' : 'Создать'} />
+	<ActionButton
+		onCancel={resetForm}
+		onSubmit={submitForm}
+		submitLabel={isEditMode ? 'Сохранить' : 'Создать'}
+	/>
 </form>
 
 <style>

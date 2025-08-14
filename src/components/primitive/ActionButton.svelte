@@ -2,12 +2,13 @@
 	// ActionButton
 
 	export let onCancel: () => void;
+	export let onSubmit: () => void;
 	export let submitLabel: string = 'Сохранить';
 </script>
 
 <div class="action-buttons">
 	<button type="button" on:click={onCancel} class="cancel-btn"> Отмена </button>
-	<button type="submit" class="submit-btn">
+	<button type="submit" class="submit-btn" on:click={onSubmit}>
 		{submitLabel}
 	</button>
 </div>
@@ -30,21 +31,21 @@
 
 	.cancel-btn {
 		background: none;
-		border: 1px solid #ddd;
-		color: #333;
+		border: 1px solid var(--color-gray-300);
+		color: var(--color-gray-900);
 	}
 
 	.cancel-btn:hover {
-		background: #f5f5f5;
+		background: var(--color-gray-100);
 	}
 
 	.submit-btn {
-		background: #4caf50;
-		color: white;
+		background: var(--color-green-500);
+		color: var(--color-white);
 		border: none;
 	}
 
 	.submit-btn:hover {
-		background: #3e8e41;
+		background: var(--color-green-700);
 	}
 </style>

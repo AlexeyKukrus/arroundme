@@ -4,21 +4,27 @@
 	import type { Event } from '$lib/types/event';
 	import { handlers } from 'svelte/legacy';
 	import { truncateString } from '../../../../helpers/helpers';
+	import { eventTypesDataOptions } from '../../../../helpers/helpers-data-options';
 
 	export let item: Event = {
 		name: '',
 		description: '',
-		address: ''
+		address: '',
+		activityType: ''
 	};
 
 	let title: string = '';
 	let description: string = '';
 	let address: string = '';
+	let badgeColor: string = '';
+	let type: string = '';
 
 	$: {
 		title = truncateString(item.name, 25) || '';
-		description = truncateString(item.description, 70) || '';
+		description = truncateString(item.description, 90) || '';
 		address = truncateString(item.address, 40) || '';
+		badgeColor = `event-type-${item.activityType}` || '';
+		type = eventTypesDataOptions[item.activityType].name || '';
 	}
 	const handleClick = () => {
 		goto(`/event/${item.id}/view`);
@@ -33,7 +39,8 @@
 		<h3>{title}</h3>
 		{#if item.scheduledFor}
 			<div class="event-date">
-				{new Date(item.scheduledFor).toLocaleDateString()}
+				<span class="m-right-5">{new Date(item.scheduledFor).toLocaleDateString()}</span>
+				<span class="event-type {badgeColor}">{type}</span>
 			</div>
 		{/if}
 		{#if item.address}

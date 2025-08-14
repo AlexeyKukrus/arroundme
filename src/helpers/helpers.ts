@@ -16,3 +16,16 @@ export const truncateString = (str: string, maxLength: number): string => {
 
 	return truncated + ellipsis;
 };
+
+export const formatISOtoString = (isoString: string): string => {
+	return isoString.slice(0, 16);
+};
+
+export const formatStringToISOString = (dateString: string): string => {
+	const regex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/;
+	if (!regex.test(dateString)) {
+		throw new Error(`Invalid date format. Expected "YYYY-MM-DDTHH:mm", got "${dateString}"`);
+	}
+
+	return `${dateString}:00Z`;
+};

@@ -17,9 +17,6 @@
 			<input {type} bind:value {placeholder} {required} class="input" />
 		{/if}
 	</label>
-	{#if value && required}
-		<span class="checkmark">✅</span>
-	{/if}
 </div>
 
 <style>
@@ -39,20 +36,19 @@
 	.input {
 		width: 100%;
 		padding: 0.75rem;
-		border: 1px solid #ddd;
+		border: 1px solid var(--color-gray-300);
 		border-radius: 4px;
 		font-size: 1rem;
+	}
+
+	.input:focus {
+		outline: none;
+		border-color: var(--color-action-success);
+		box-shadow: 0 0 0 2px rgba(66, 185, 131, 0.2);
 	}
 
 	textarea.input {
 		min-height: 100px;
 		resize: vertical;
-	}
-
-	.checkmark {
-		position: absolute;
-		right: 10px;
-		top: 40px;
-		color: #4caf50;
 	}
 </style>

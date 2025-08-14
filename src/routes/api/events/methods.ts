@@ -1,4 +1,5 @@
 import { fetchFromClient } from '../../../helpers/fetch';
+import type { Event } from '$lib/types/event';
 
 export const getEventsListMethod = async () => {
 	try {
@@ -12,12 +13,17 @@ export const getEventsListMethod = async () => {
 	}
 };
 
-export const getEventByIdMethod = async (id: string): Promise<Event> => {
-    const response = await fetchFromClient("GET", `/api/events/${id}`);
-    
-    if (!response.ok) {
-        throw new Error(`Failed to fetch event: ${response.status}`);
-    }
+export const createEventMethod = async (data: Event) => {
+	// !TODO
+	// validateOrThrow(eventCreateFormScheme, body)
 
-    return await response.json() as Event;
+	try {
+		const response = await fetchFromClient('POST', '/api/events', data);
+
+		return await response.json();
+	} catch (error) {
+		console.error(error);
+
+		throw error;
+	}
 };
