@@ -8,7 +8,7 @@
 
 		createEventMethod(data).then(() => {
 			goto('/events');
-		})
+		});
 	};
 </script>
 

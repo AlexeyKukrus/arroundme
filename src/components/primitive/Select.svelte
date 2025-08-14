@@ -1,4 +1,6 @@
-<script>
+<script lang="ts">
+	// Select
+
 	import { createEventDispatcher } from 'svelte';
 
 	export let options = [];
@@ -6,7 +8,7 @@
 	export let multiple = false;
 	export let placeholder = 'Выберите...';
 
-	const dispatch = createEventDispatcher()
+	const dispatch = createEventDispatcher();
 
 	function handleChange(e) {
 		const selectElement = e.currentTarget;
@@ -14,7 +16,6 @@
 		const value = multiple ? selectedValues : selectedValues[0] || null;
 		dispatch('change', value);
 	}
-
 </script>
 
 <div class="select-container">
@@ -46,9 +47,9 @@
 	select {
 		width: 100%;
 		padding: 10px;
-		border: 1px solid #ddd;
+		border: 1px solid var(--color-gray-300);
 		border-radius: 4px;
-		background-color: white;
+		background-color: var(--color-white);
 		font-size: 16px;
 		cursor: pointer;
 		appearance: none;
@@ -57,7 +58,7 @@
 
 	select:focus {
 		outline: none;
-		border-color: #42b983;
+		border-color: var(--color-action-success);
 		box-shadow: 0 0 0 2px rgba(66, 185, 131, 0.2);
 	}
 
@@ -71,7 +72,7 @@
 	}
 
 	option:checked {
-		background-color: #42b983;
-		color: white;
+		background-color: var(--color-action-success);
+		color: var(--color-white);
 	}
 </style>

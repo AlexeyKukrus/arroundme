@@ -1,4 +1,5 @@
 <script lang="ts">
+	// EventForm
 	import { goto } from '$app/navigation';
 	import { createEventDispatcher } from 'svelte';
 	import { formatISOtoString, formatStringToISOString } from '../../../../helpers/helpers.js';
@@ -13,9 +14,9 @@
 		activityType: '',
 		description: '',
 		coordinates: '',
-		scheduledFor: '',
+		scheduledFor: ''
 	};
-	export let isEditMode = false;
+	export let isEditMode: boolean = false;
 
 	const dispatch = createEventDispatcher();
 
@@ -36,13 +37,13 @@
 		}
 
 		if (data.activityType) {
-			selectedEventType = [data.activityType]
+			selectedEventType = [data.activityType];
 		}
 	}
 
 	const submitForm = (e: Event) => {
 		e.preventDefault();
-		console.log(selectedEventType);
+
 		formData = {
 			name: selectedEventName || '',
 			address: selectedEventAddress || '',
@@ -59,9 +60,8 @@
 	};
 
 	const changeEventType = (e) => {
-		selectedEventType = [e.detail]
-
-	}
+		selectedEventType = [e.detail];
+	};
 	const resetForm = () => {
 		formData = {};
 		selectedEventName = '';

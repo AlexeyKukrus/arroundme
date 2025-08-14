@@ -1,10 +1,16 @@
 :root {
-	--color-bg: #ffffff;
+	--color-white: #ffffff;
 	--color-text: #1a1a1a;
 	--color-primary: #0070f3;
 	--color-border: #dee2e6;
 	--color-midnight: #000957;
 	--color-error: #e71607;
+	--color-gray-900: #333333;
+	--color-gray-300: #dddddd;
+	--color-gray-100: #f5f5f5;
+	--color-green-500: #4caf50;
+	--color-green-700: #3e8e41;
+	--color-action-success: #42b983;
 
 	/* Цвета событий*/
 	--event-concerts: #ab47bc;

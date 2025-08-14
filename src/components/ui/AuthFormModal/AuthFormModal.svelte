@@ -1,11 +1,11 @@
 <script lang="ts">
 	// AuthFormModal
-	import { goto } from '$app/navigation';
+
 	import { showAuthModal, isAuthenticated } from '$lib/stores/auth';
 
-	let email = '';
-	let password = '';
-	let errorMessage = '';
+	let email: string = '';
+	let password: string = '';
+	let errorMessage: string = '';
 
 	const handleSubmit = (e: Event) => {
 		e.preventDefault();

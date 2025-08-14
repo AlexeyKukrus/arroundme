@@ -36,14 +36,14 @@
 	.input {
 		width: 100%;
 		padding: 0.75rem;
-		border: 1px solid #ddd;
+		border: 1px solid var(--color-gray-300);
 		border-radius: 4px;
 		font-size: 1rem;
 	}
 
 	.input:focus {
 		outline: none;
-		border-color: #42b983;
+		border-color: var(--color-action-success);
 		box-shadow: 0 0 0 2px rgba(66, 185, 131, 0.2);
 	}
 
