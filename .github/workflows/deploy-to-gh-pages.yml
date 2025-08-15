@@ -7,7 +7,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
+
     permissions:
       contents: write
       pages: write
@@ -39,7 +39,7 @@ jobs:
           npm run build
           touch build/.nojekyll
         env:
-          VITE_BASE_PATH: "/${{ github.event.repository.name }}"  # Для корневых путей
+          VITE_BASE_PATH: '/${{ github.event.repository.name }}' # Для корневых путей
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

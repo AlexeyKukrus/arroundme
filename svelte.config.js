@@ -7,11 +7,10 @@ const config = {
 	// for more information about preprocessors
 	preprocess: vitePreprocess(),
 
-	 kit: {
-    	adapter: adapter({
-      		fallback: 'index.html',
-			strict: false
-    	}),
+	kit: {
+		adapter: adapter({
+			fallback: '200.html'
+		})
 	}
 };
 
