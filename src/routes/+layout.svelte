@@ -7,6 +7,8 @@
 	import AuthFormModal from '../components/ui/AuthFormModal/AuthFormModal.svelte';
 	import '../main.css';
 
+	export const prerender = true
+
 	let isMobile = false;
 
 	onMount(() => {
