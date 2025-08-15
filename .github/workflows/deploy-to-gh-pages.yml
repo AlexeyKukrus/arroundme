@@ -2,11 +2,11 @@ name: Build and Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]  # Исправлено: ветка main
+    branches: [main]
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest  # Исправлено: корректное окружение
+    runs-on: ubuntu-latest
     
     permissions:
       contents: write
@@ -20,16 +20,26 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'  # Рекомендуемая LTS версия
+          node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
+      - name: Install static adapter
+        run: npm install -D @sveltejs/adapter-static
+
+      - name: Configure adapter
+        run: |
+          echo "import adapter from '@sveltejs/adapter-static';" > svelte.config.js
+          echo "export default { kit: { adapter: adapter() } };" >> svelte.config.js
+
       - name: Build project
         run: |
           npm run build
-          touch build/.nojekyll  # Для отключения обработки Jekyll
+          touch build/.nojekyll
+        env:
+          VITE_BASE_PATH: "/${{ github.event.repository.name }}"  # Для корневых путей
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -37,8 +47,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'build'  # Путь к собранному проекту
+          path: build/
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
-        id: deployment
