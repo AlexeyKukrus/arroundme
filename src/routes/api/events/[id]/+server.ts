@@ -3,7 +3,7 @@ import { processApiResponse } from '../../../../helpers/api-response-helpers';
 import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
 
-export const prerender = false;;
+export const prerender = 'auto';
 
 export const GET: RequestHandler = async (params) => {
 	const id = params.params.id;

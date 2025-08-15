@@ -2,7 +2,7 @@ import { fetchFromServer } from '../../../helpers/fetch';
 import { processApiResponse } from '../../../helpers/api-response-helpers';
 import { json } from '@sveltejs/kit';
 
-export const prerender = false;;
+export const prerender = 'auto';
 
 export async function GET({ url, cookies, fetch, request }) {
 	const response = await fetchFromServer(`events`, {
