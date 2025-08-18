@@ -4,17 +4,21 @@
 	import { page } from '$app/stores';
 	import type { Event } from '$lib/types/event';
 	import { getEventByIdMethod } from '../../../routes/api/events/[id]/methods';
-	import { eventTypesDataOptions } from '../../../helpers/helpers-data-options';
 
 	let event: Event = {
 		id: '',
 		name: '',
 		description: '',
-		activityType: '',
 		address: '',
 		coordinates: '',
 		scheduledFor: '',
-		createdAt: ''
+		createdAt: '',
+		category: {
+			name: '',
+			mediaId: '',
+			id: '',
+			verbose: ''
+		}
 	};
 	let loading = false;
 	let error: string | null = null;
@@ -26,8 +30,8 @@
 	const fetchEvent = () => {
 		getEventByIdMethod(eventId).then((res) => {
 			event = res.event || {};
-			eventType = eventTypesDataOptions[event.activityType].name;
-			badgeColor = `event-type-${event.activityType}`;
+			eventType = event.category.name;
+			badgeColor = `event-type-${event.category.verbose}`;
 		});
 	};
 

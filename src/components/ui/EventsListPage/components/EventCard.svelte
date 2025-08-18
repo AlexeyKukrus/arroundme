@@ -2,15 +2,18 @@
 	// EventCard
 	import { goto } from '$app/navigation';
 	import type { Event } from '$lib/types/event';
-	import { handlers } from 'svelte/legacy';
 	import { truncateString } from '../../../../helpers/helpers';
-	import { eventTypesDataOptions } from '../../../../helpers/helpers-data-options';
 
 	export let item: Event = {
 		name: '',
 		description: '',
 		address: '',
-		activityType: ''
+		category: {
+			name: '',
+			verbose: '',
+			mediaId: '',
+			id: ''
+		}
 	};
 
 	let title: string = '';
@@ -23,8 +26,8 @@
 		title = truncateString(item.name, 25) || '';
 		description = truncateString(item.description, 90) || '';
 		address = truncateString(item.address, 40) || '';
-		badgeColor = `event-type-${item.activityType}` || '';
-		type = eventTypesDataOptions[item.activityType].name || '';
+		badgeColor = `event-type-${item.category.verbose}` || '';
+		type = item.category.name || '';
 	}
 	const handleClick = () => {
 		goto(`/event/${item.id}/view`);

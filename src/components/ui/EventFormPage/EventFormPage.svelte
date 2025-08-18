@@ -3,11 +3,13 @@
 	import { onMount } from 'svelte';
 	import { getEventByIdMethod } from '../../../routes/api/events/[id]/methods';
 	import { page } from '$app/stores';
+	import { getCategoriesListMethod } from '../../../routes/api/events/categories/methods';
 
 	export let mode: string = 'create';
 
 	let eventId = $page.params.id || '';
 	let event = {};
+	let categories = [];
 	let title = 'СОЗДАТЬ НОВОЕ СОБЫТИЕ';
 	let isEditMode = false;
 
@@ -21,12 +23,15 @@
 				event.id = eventId;
 			});
 		}
+		getCategoriesListMethod().then((res) => {
+			categories = res.event_categories || [];
+		});
 	});
 </script>
 
 <div class="create-event-page">
 	<h1>{title}</h1>
-	<EventForm data={event} {isEditMode} on:submitForm />
+	<EventForm data={event} {isEditMode} {categories} on:submitForm />
 </div>
 
 <style>

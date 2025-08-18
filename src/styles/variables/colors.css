@@ -1,7 +1,7 @@
 .event-type-concerts {
 	background-color: var(--event-concerts);
 }
-.event-type-party {
+.event-type-parties {
 	background-color: var(--event-party);
 }
 .event-type-business {
