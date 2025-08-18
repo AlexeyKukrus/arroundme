@@ -1,5 +1,5 @@
 export interface Event {
-	activityType?: string;
+	category: Category;
 	address: string;
 	coordinates?: string;
 	createdAt?: string;
@@ -8,4 +8,11 @@ export interface Event {
 	name: string;
 	scheduledFor?: string;
 	updatedAt?: string;
+}
+
+export interface Category {
+	id: string;
+	mediaId: string;
+	name: string;
+	verbose: string;
 }

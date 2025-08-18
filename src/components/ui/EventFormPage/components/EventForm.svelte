@@ -11,11 +11,17 @@
 	export let data = {
 		name: '',
 		address: '',
-		activityType: '',
 		description: '',
 		coordinates: '',
-		scheduledFor: ''
+		scheduledFor: '',
+		category: {
+			id: '',
+			name: '',
+			verbose: '',
+			mediaId: ''
+		}
 	};
+	export let categories = [];
 	export let isEditMode: boolean = false;
 
 	const dispatch = createEventDispatcher();
@@ -26,6 +32,7 @@
 	let selectedEventData = '';
 	let selectedEventDescription = '';
 	let selectedEventType: string[] = [];
+	let selectedEventCategoryId = '';
 
 	$: {
 		selectedEventName = data.name || '';
@@ -35,9 +42,13 @@
 		if (data.scheduledFor) {
 			selectedEventData = formatISOtoString(data.scheduledFor) || '';
 		}
-
-		if (data.activityType) {
-			selectedEventType = [data.activityType];
+		if (data.category?.name) {
+			selectedEventType = [
+				eventTypesListOptions.find((item) => item.value === data.category.verbose)
+			];
+			selectedEventCategoryId = categories.find(
+				(item) => item.verbose === data.category.verbose
+			)?.id;
 		}
 	}
 
@@ -49,8 +60,8 @@
 			address: selectedEventAddress || '',
 			scheduledFor: formatStringToISOString(selectedEventData) || '',
 			description: selectedEventDescription || '',
-			activityType: selectedEventType[0] || null,
-			coordinates: '55.752004|37.617734'
+			coordinates: '55.752004|37.617734',
+			categoryId: selectedEventCategoryId || ''
 		};
 
 		if (isEditMode) {
@@ -61,7 +72,9 @@
 
 	const changeEventType = (e) => {
 		selectedEventType = [e.detail];
+		selectedEventCategoryId = categories.find((item) => item.verbose === e.detail).id;
 	};
+
 	const resetForm = () => {
 		formData = {};
 		selectedEventName = '';
