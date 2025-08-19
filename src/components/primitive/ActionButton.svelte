@@ -4,10 +4,11 @@
 	export let onCancel: () => void;
 	export let onSubmit: () => void;
 	export let submitLabel: string = 'Сохранить';
+	export let cancelLabel: string = 'Отмена';
 </script>
 
 <div class="action-buttons">
-	<button type="button" on:click={onCancel} class="cancel-btn"> Отмена </button>
+	<button type="button" on:click={onCancel} class="cancel-btn">{cancelLabel}</button>
 	<button type="submit" class="submit-btn" on:click={onSubmit}>
 		{submitLabel}
 	</button>
@@ -18,7 +19,6 @@
 		display: flex;
 		justify-content: flex-end;
 		gap: 1rem;
-		margin-top: 2rem;
 	}
 
 	button {
@@ -48,4 +48,10 @@
 	.submit-btn:hover {
 		background: var(--color-green-700);
 	}
+
+  @media (max-width: 900px) {
+      button {
+          padding: 0.5rem 0.9rem;
+      }
+  }
 </style>

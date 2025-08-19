@@ -5,13 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b9df272-ac59-404d-baa7-da0e5b392159" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/ui/ConfirmationModal/ConfirmationModal.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ui/ConfirmationModal/helpers/helpers-options.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/EventFormPage/EventFormPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/EventFormPage/EventFormPage.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/EventFormPage/components/EventForm.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/EventFormPage/components/EventForm.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/primitive/ActionButton.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/primitive/ActionButton.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ui/EventViewPage/EventViewPage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/EventViewPage/EventViewPage.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/EventsListPage/components/EventCard.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/EventsListPage/components/EventCard.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/types/event.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/types/event.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/variables/colors.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/variables/colors.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/api/events/[id]/+server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/events/[id]/+server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/api/events/[id]/methods.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/events/[id]/methods.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/layout/event-view.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/layout/event-view.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +23,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Select" />
+        <option value="ConfirmationModal" />
         <option value="TypeScript File" />
       </list>
     </option>
@@ -41,7 +43,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "ME-0007",
+    "git-widget-placeholder": "ME-0008",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -92,6 +94,7 @@
       <workItem from="1755197729803" duration="1793000" />
       <workItem from="1755255942868" duration="7000" />
       <workItem from="1755530916979" duration="1547000" />
+      <workItem from="1755599027184" duration="9491000" />
     </task>
     <servers />
   </component>

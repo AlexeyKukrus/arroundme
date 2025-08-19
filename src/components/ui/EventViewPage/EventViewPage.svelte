@@ -3,7 +3,20 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import type { Event } from '$lib/types/event';
-	import { getEventByIdMethod } from '../../../routes/api/events/[id]/methods';
+	import { deleteEventByIdMethod, getEventByIdMethod } from '../../../routes/api/events/[id]/methods';
+	import ActionButton from '../../primitive/ActionButton.svelte';
+	import { goto } from '$app/navigation';
+	import ConfirmationModal from '../ConfirmationModal/ConfirmationModal.svelte';
+	import { confirmationModalOptions } from '../ConfirmationModal/helpers/helpers-options';
+
+	const dateConfig= {
+		day: 'numeric',
+		month: 'long',
+		year: 'numeric',
+		hour: '2-digit',
+		minute: '2-digit'
+	}
+	const modalConfig = confirmationModalOptions.deleteEvent
 
 	let event: Event = {
 		id: '',
@@ -24,6 +37,8 @@
 	let error: string | null = null;
 	let badgeColor = '';
 	let eventType = '';
+	let showEventSettings = true;
+	let isConfirmModalOpen = false;
 
 	const eventId = $page.params.id;
 
@@ -34,6 +49,20 @@
 			badgeColor = `event-type-${event.category.verbose}`;
 		});
 	};
+	const goBack = () => {
+		goto('/events')
+	}
+	const openConfirmationModal = () => {
+		isConfirmModalOpen = true
+	}
+	const editEvent = () => {
+		goto(`/event/${eventId}/edit`)
+	}
+	const deleteEvent = () => {
+		deleteEventByIdMethod(eventId).then(() => {
+			goBack()
+		})
+	}
 
 	onMount(() => {
 		if (browser) {
@@ -42,6 +71,21 @@
 	});
 </script>
 
+{#if showEventSettings}
+	<div class="event-view event-settings">
+		<div class="event-go-back">
+			<button on:click={goBack}>Назад</button>
+		</div>
+		<div>
+			<ActionButton
+				onCancel={openConfirmationModal}
+				onSubmit={editEvent}
+				submitLabel="Редактировать"
+				cancelLabel="Удалить"
+			/>
+		</div>
+	</div>
+{/if}
 <div class="event-view">
 	<img src={'../../event.jpg'} alt={event.name} class="event-view-image" />
 
@@ -51,14 +95,7 @@
 			<div class="event-meta">
 				<span class="event-type {badgeColor}">{eventType}</span>
 				<span class="event-view-date">
-					<!-- TODO! -->
-					{new Date(event.scheduledFor).toLocaleDateString('ru-RU', {
-						day: 'numeric',
-						month: 'long',
-						year: 'numeric',
-						hour: '2-digit',
-						minute: '2-digit'
-					})}
+					{new Date(event.scheduledFor).toLocaleDateString('ru-RU', dateConfig)}
 				</span>
 			</div>
 		</div>
@@ -68,14 +105,7 @@
 			<div class="event-meta">
 				<span class="event-type {badgeColor}">{eventType}</span>
 				<span class="event-view-date">
-					<!-- TODO! -->
-					{new Date(event.scheduledFor).toLocaleDateString('ru-RU', {
-						day: 'numeric',
-						month: 'long',
-						year: 'numeric',
-						hour: '2-digit',
-						minute: '2-digit'
-					})}
+					{new Date(event.scheduledFor).toLocaleDateString('ru-RU', dateConfig)}
 				</span>
 			</div>
 		</div>
@@ -92,3 +122,5 @@
 		</div>
 	</div>
 </div>
+
+<ConfirmationModal bind:isOpen={isConfirmModalOpen} config={modalConfig} on:submit={deleteEvent} />
