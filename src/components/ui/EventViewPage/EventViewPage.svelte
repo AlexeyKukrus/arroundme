@@ -87,7 +87,7 @@
 	</div>
 {/if}
 <div class="event-view">
-	<img src={'../../event.jpg'} alt={event.name} class="event-view-image" />
+	<img src={`https://aroundme.space/media/${event.category.mediaId}`} alt={event.name} class="event-view-image" />
 
 	<div class="event-container">
 		<div class="event-header">
