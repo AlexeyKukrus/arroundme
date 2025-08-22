@@ -37,7 +37,11 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <div class="event-card" on:click={handleClick}>
-	<img src={`https://aroundme.space/media/${item.category.mediaId}`} alt={item.name} class="event-image" />
+	<img
+		src={`https://aroundme.space/media/${item.category.mediaId}`}
+		alt={item.name}
+		class="event-image"
+	/>
 	<div class="event-card-content">
 		<h3>{title}</h3>
 		{#if item.scheduledFor}

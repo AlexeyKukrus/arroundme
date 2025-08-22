@@ -85,6 +85,9 @@
 
 		goto('/events');
 	};
+	const openMapModal = () => {
+		dispatch('openMapModal');
+	};
 </script>
 
 <form on:submit={submitForm}>
@@ -103,6 +106,7 @@
 		placeholder="Введите адрес"
 		required
 	/>
+	<button on:click={openMapModal}>Указать место на карте</button>
 
 	<FormField label="Дата" type="datetime-local" bind:value={selectedEventData} required />
 
@@ -132,5 +136,9 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1.5rem;
+	}
+
+	button {
+		text-align: right;
 	}
 </style>

@@ -4,6 +4,7 @@
 	import { getEventByIdMethod } from '../../../routes/api/events/[id]/methods';
 	import { page } from '$app/stores';
 	import { getCategoriesListMethod } from '../../../routes/api/events/categories/methods';
+	import MapModal from '../MapModal/MapModal.svelte';
 
 	export let mode: string = 'create';
 
@@ -12,6 +13,11 @@
 	let categories = [];
 	let title = 'СОЗДАТЬ НОВОЕ СОБЫТИЕ';
 	let isEditMode = false;
+	let isMapModalOpen = false;
+
+	const openMapModal = () => {
+		isMapModalOpen = true;
+	};
 
 	$: title = mode === 'create' ? 'СОЗДАТЬ СОБЫТИЕ' : 'РЕДАКТИРОВАТЬ СОБЫТИЕ';
 	$: isEditMode = mode === 'edit';
@@ -31,8 +37,14 @@
 
 <div class="create-event-page">
 	<h1>{title}</h1>
-	<EventForm data={event} {isEditMode} {categories} on:submitForm />
+	<EventForm data={event} {isEditMode} {categories} on:submitForm on:openMapModal={openMapModal} />
 </div>
+
+<MapModal
+	bind:isOpen={isMapModalOpen}
+	onClose={() => (isMapModalOpen = false)}
+	onCoordinatesSelect={(item) => console.log('item', item)}
+/>
 
 <style>
 	.create-event-page {

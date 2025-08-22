@@ -30,13 +30,10 @@ export const updateEventByIdMethod = async (data: Event) => {
 
 export const deleteEventByIdMethod = async (id) => {
 	try {
-		const response = await fetchFromClient(
-			"DELETE",
-			`/api/events/${id}`
-		)
-		return await response.json()
+		const response = await fetchFromClient('DELETE', `/api/events/${id}`);
+		return await response.json();
 	} catch (error) {
-		console.error(error)
-		throw error
+		console.error(error);
+		throw error;
 	}
-}
+};

@@ -44,4 +44,4 @@ export const DELETE = async (params) => {
 	const jsonData = await processApiResponse(response);
 
 	return json(jsonData);
-}
+};

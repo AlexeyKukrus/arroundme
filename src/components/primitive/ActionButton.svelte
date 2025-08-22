@@ -49,9 +49,9 @@
 		background: var(--color-green-700);
 	}
 
-  @media (max-width: 900px) {
-      button {
-          padding: 0.5rem 0.9rem;
-      }
-  }
+	@media (max-width: 900px) {
+		button {
+			padding: 0.5rem 0.9rem;
+		}
+	}
 </style>

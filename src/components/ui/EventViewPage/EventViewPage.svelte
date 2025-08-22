@@ -3,20 +3,23 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import type { Event } from '$lib/types/event';
-	import { deleteEventByIdMethod, getEventByIdMethod } from '../../../routes/api/events/[id]/methods';
+	import {
+		deleteEventByIdMethod,
+		getEventByIdMethod
+	} from '../../../routes/api/events/[id]/methods';
 	import ActionButton from '../../primitive/ActionButton.svelte';
 	import { goto } from '$app/navigation';
 	import ConfirmationModal from '../ConfirmationModal/ConfirmationModal.svelte';
 	import { confirmationModalOptions } from '../ConfirmationModal/helpers/helpers-options';
 
-	const dateConfig= {
+	const dateConfig = {
 		day: 'numeric',
 		month: 'long',
 		year: 'numeric',
 		hour: '2-digit',
 		minute: '2-digit'
-	}
-	const modalConfig = confirmationModalOptions.deleteEvent
+	};
+	const modalConfig = confirmationModalOptions.deleteEvent;
 
 	let event: Event = {
 		id: '',
@@ -50,19 +53,19 @@
 		});
 	};
 	const goBack = () => {
-		goto('/events')
-	}
+		goto('/events');
+	};
 	const openConfirmationModal = () => {
-		isConfirmModalOpen = true
-	}
+		isConfirmModalOpen = true;
+	};
 	const editEvent = () => {
-		goto(`/event/${eventId}/edit`)
-	}
+		goto(`/event/${eventId}/edit`);
+	};
 	const deleteEvent = () => {
 		deleteEventByIdMethod(eventId).then(() => {
-			goBack()
-		})
-	}
+			goBack();
+		});
+	};
 
 	onMount(() => {
 		if (browser) {
@@ -87,7 +90,11 @@
 	</div>
 {/if}
 <div class="event-view">
-	<img src={`https://aroundme.space/media/${event.category.mediaId}`} alt={event.name} class="event-view-image" />
+	<img
+		src={`https://aroundme.space/media/${event.category.mediaId}`}
+		alt={event.name}
+		class="event-view-image"
+	/>
 
 	<div class="event-container">
 		<div class="event-header">
