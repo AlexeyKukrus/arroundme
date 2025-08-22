@@ -27,3 +27,13 @@ export const updateEventByIdMethod = async (data: Event) => {
 		throw error;
 	}
 };
+
+export const deleteEventByIdMethod = async (id) => {
+	try {
+		const response = await fetchFromClient('DELETE', `/api/events/${id}`);
+		return await response.json();
+	} catch (error) {
+		console.error(error);
+		throw error;
+	}
+};

@@ -26,7 +26,20 @@ export const PUT = async (params) => {
 		fetch,
 		request
 	});
-	console.log(params);
+
+	const jsonData = await processApiResponse(response);
+
+	return json(jsonData);
+};
+
+export const DELETE = async (params) => {
+	const id = params.params.id;
+	const { cookies, fetch, request } = params;
+	const response = await fetchFromServer(`events/${id}`, {
+		cookies,
+		fetch,
+		request
+	});
 
 	const jsonData = await processApiResponse(response);
 
