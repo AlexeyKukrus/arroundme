@@ -1,7 +1,7 @@
 import { HttpError } from '../models/http-error-model';
 
 const API_URL: string = 'https://aroundme.space/api/v1';
-
+const GEOCODE_URL: string = 'https://geocode-maps.yandex.ru/v1';
 type FetchConfig = {
 	method: string;
 	headers: Record<string, string>;
@@ -76,6 +76,22 @@ export async function fetchFromServer(url: string, params: ServerFetchParams): P
 	}
 
 	return await fetch(`${API_URL}/${url}`, config);
+}
+export async function fetchFromGeocode(url: string, params: ServerFetchParams): Promise<Response> {
+	const { cookies, fetch, request } = params;
+
+	const config: FetchConfig = {
+		method: request.method,
+		headers: { authorization: 'Bearer ' + cookies.get('accessToken') }
+	};
+
+	if (request.headers.get('content-type')?.includes('multipart/form-data')) {
+		config.body = await request.formData();
+	} else if (request.body) {
+		config.body = JSON.stringify(await request.json());
+	}
+
+	return await fetch(`${GEOCODE_URL}/${url}`, config);
 }
 
 export const fetchFromAuth = async (
