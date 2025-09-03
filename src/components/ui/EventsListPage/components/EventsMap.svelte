@@ -2,7 +2,6 @@
 	// EventsMap
 
 	import { onMount } from 'svelte';
-	import { ENV_CONFIG } from '../../../../lib/config/environment';
 	import { PUBLIC_YANDEX_MAPS_API_KEY } from '$env/static/public';
 	import type { Event } from '$lib/types/event';
 
