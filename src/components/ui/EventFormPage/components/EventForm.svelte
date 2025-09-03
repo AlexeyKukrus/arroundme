@@ -4,7 +4,6 @@
 	import { createEventDispatcher } from 'svelte';
 	import { formatISOtoString, formatStringToISOString } from '../../../../helpers/helpers.js';
 	import { eventTypesListOptions } from '../helpers/helpers-options';
-	import { ENV_CONFIG } from '../../../../lib/config/environment';
 	import { notifications } from '../../../../lib/stores/notifications';
 	import Select from '../../../primitive/Select.svelte';
 	import ActionButton from '../../../primitive/ActionButton.svelte';

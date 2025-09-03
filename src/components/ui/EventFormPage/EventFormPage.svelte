@@ -10,6 +10,7 @@
 	import { createEventMethod, updateEventMethod } from '../../../routes/api/events/methods';
 	import { goto } from '$app/navigation';
 	import type { Event, Category } from '$lib/types/event';
+	import { PUBLIC_YANDEX_MAPS_API_KEY } from '$env/static/public';
 
 	export let mode: string = 'create';
 
@@ -30,7 +31,7 @@
 
 	const getAddressByCoords = (coords: [number, number]) => {
 		const data = {
-			apikey: `3491db01-7fa8-4797-add0-9fbd22112c3f`,
+			apikey: PUBLIC_YANDEX_MAPS_API_KEY,
 			geocode: `${coords[1].toFixed(6)},${coords[0].toFixed(6)}`,
 			format: 'json'
 		};

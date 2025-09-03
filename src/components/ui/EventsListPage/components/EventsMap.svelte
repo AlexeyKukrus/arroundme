@@ -3,6 +3,7 @@
 
 	import { onMount } from 'svelte';
 	import { ENV_CONFIG } from '../../../../lib/config/environment';
+	import { PUBLIC_YANDEX_MAPS_API_KEY } from '$env/static/public';
 	import type { Event } from '$lib/types/event';
 
 	export let events: Event[] = [];
@@ -53,7 +54,7 @@
 
 	onMount(() => {
 		const script = document.createElement('script');
-		script.src = `https://api-maps.yandex.ru/2.1/?apikey=${ENV_CONFIG.yandexMapsApiKey}&lang=ru_RU`;
+		script.src = `https://api-maps.yandex.ru/2.1/?apikey=${PUBLIC_YANDEX_MAPS_API_KEY}&lang=ru_RU`;
 		script.type = 'text/javascript';
 		script.onload = initMap;
 		document.head.appendChild(script);

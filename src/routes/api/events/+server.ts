@@ -1,4 +1,4 @@
-import { fetchFromServer } from '../../../helpers/fetch';
+import { fetchFromServer } from '../../../helpers/server-fetch';
 import { processApiResponse } from '../../../helpers/api-response-helpers';
 import { json } from '@sveltejs/kit';
 import type { RequestEvent } from '@sveltejs/kit';

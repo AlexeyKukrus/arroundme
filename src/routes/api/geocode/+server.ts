@@ -1,4 +1,4 @@
-import { fetchFromGeocode, fetchFromServer } from '../../../helpers/fetch';
+import { fetchFromGeocode } from '../../../helpers/server-fetch';
 import { processApiResponse } from '../../../helpers/api-response-helpers';
 import { json } from '@sveltejs/kit';
 
