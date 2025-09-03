@@ -174,64 +174,64 @@ export const processApiResponse = async (response: ApiResponse): Promise<any> =>
 };
 
 export const getQueryParamsString = (aParams) => {
-	const paramsArray = []
-	let paramsString = ""
+	const paramsArray = [];
+	let paramsString = '';
 	const checkParam = (aValue) => {
-		let isValid = false
+		let isValid = false;
 
 		if (!!aValue) {
 			if (aValue instanceof Date) {
 				if (!isNaN(aValue)) {
-					isValid = true
+					isValid = true;
 				}
 			} else {
-				isValid = true
+				isValid = true;
 			}
 		}
-		if (typeof aValue === "boolean") {
-			isValid = true
+		if (typeof aValue === 'boolean') {
+			isValid = true;
 		}
-		if (typeof aValue === "number") {
-			isValid = true
+		if (typeof aValue === 'number') {
+			isValid = true;
 		}
 
-		return isValid
-	}
+		return isValid;
+	};
 
 	const addParamsArray = (aKey, aValue) => {
-		const isValidDate = isValidDateHelper(aValue)
-		let validValue
+		const isValidDate = isValidDateHelper(aValue);
+		let validValue;
 
 		if (isValidDate) {
-			validValue = new Date(aValue).toISOString()
+			validValue = new Date(aValue).toISOString();
 		} else {
-			validValue = aValue
+			validValue = aValue;
 		}
 
-		const paramString = `${aKey}=${validValue}`
-		paramsArray.push(paramString)
-	}
+		const paramString = `${aKey}=${validValue}`;
+		paramsArray.push(paramString);
+	};
 
-	if (aParams && typeof aParams === "object") {
+	if (aParams && typeof aParams === 'object') {
 		for (let param in aParams) {
-			const item = aParams[param]
+			const item = aParams[param];
 
 			if (checkParam(item)) {
 				if (Array.isArray(item)) {
 					item.forEach((value) => {
 						if (checkParam(value)) {
-							addParamsArray(param, value)
+							addParamsArray(param, value);
 						}
-					})
+					});
 				} else {
-					addParamsArray(param, item)
+					addParamsArray(param, item);
 				}
 			}
 		}
 
-		paramsString = paramsArray.join("&")
-		paramsString = !!paramsString ? `?${paramsString}` : ""
+		paramsString = paramsArray.join('&');
+		paramsString = !!paramsString ? `?${paramsString}` : '';
 	}
 
-	return paramsString
-}
+	return paramsString;
+};

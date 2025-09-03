@@ -1,38 +1,91 @@
-# sv
+# 🗺️ ArroundMe - Платформа событий
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Веб-приложение для поиска и создания событий с интеграцией Яндекс.Карт.
 
-## Creating a project
+## 🚀 Быстрый старт
 
-If you're seeing this, you've probably already done this step. Congrats!
+### 1. Установка зависимостей
 
-```sh
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+```bash
+npm install
 ```
 
-## Developing
+### 2. Настройка API ключей
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Отредактируйте файл `src/lib/config/environment.ts` и замените fallback значения на ваши реальные API ключи:
 
-```sh
+```typescript
+export const config = {
+	yandexMapsApiKey: 'ваш_реальный_api_ключ_яндекс_карт',
+	apiBaseUrl: 'https://aroundme.space/api/v1',
+	geocodeBaseUrl: 'https://geocode-maps.yandex.ru/v1'
+	// ... остальные настройки
+};
+```
+
+### 3. Запуск в режиме разработки
+
+```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+Приложение будет доступно по адресу [http://localhost:5173](http://localhost:5173)
 
-To create a production version of your app:
+## 🛠️ Технологии
 
-```sh
-npm run build
+- **Frontend**: Svelte 5 + SvelteKit
+- **Стили**: CSS с CSS переменными
+- **Карты**: Яндекс.Карты API
+- **Тестирование**: Vitest + Playwright
+- **Линтинг**: ESLint + Prettier
+
+## 📁 Структура проекта
+
+```
+src/
+├── components/          # UI компоненты
+│   ├── primitive/      # Базовые компоненты
+│   └── ui/            # Специализированные компоненты
+├── lib/                # Утилиты и конфигурация
+│   └── config/        # Конфигурация (API ключи, URL'ы)
+├── routes/             # Маршруты SvelteKit
+├── helpers/            # Вспомогательные функции
+└── styles/             # Глобальные стили
 ```
 
-You can preview the production build with `npm run preview`.
+## 🔧 Доступные команды
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```bash
+npm run dev          # Запуск dev сервера
+npm run build        # Сборка для продакшна
+npm run preview      # Предпросмотр сборки
+npm run check        # Проверка типов
+npm run lint         # Линтинг кода
+npm run format       # Форматирование кода
+npm run test         # Запуск тестов
+```
+
+## 🤝 Разработка
+
+### Требования
+
+- Node.js 18+
+- npm 9+
+
+### Рекомендации
+
+1. Используйте TypeScript для всех новых файлов
+2. Следуйте принципам SvelteKit
+3. Пишите тесты для критической логики
+4. Используйте ESLint и Prettier
+
+## 🔒 Безопасность
+
+- API ключи хранятся в `src/lib/config/environment.ts`
+- Файл конфигурации исключен из git (см. .gitignore)
+- Fallback значения только для разработки
+- Для продакшна замените на реальные ключи
+
+## 📄 Лицензия
+
+MIT

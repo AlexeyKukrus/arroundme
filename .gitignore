@@ -19,6 +19,9 @@ Thumbs.db
 !.env.example
 !.env.test
 
+# Configuration files with sensitive data
+src/lib/config/environment.ts
+
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*

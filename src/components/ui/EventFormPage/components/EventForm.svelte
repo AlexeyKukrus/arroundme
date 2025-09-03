@@ -4,12 +4,14 @@
 	import { createEventDispatcher } from 'svelte';
 	import { formatISOtoString, formatStringToISOString } from '../../../../helpers/helpers.js';
 	import { eventTypesListOptions } from '../helpers/helpers-options';
+	import { ENV_CONFIG } from '../../../../lib/config/environment';
+	import { notifications } from '../../../../lib/stores/notifications';
 	import Select from '../../../primitive/Select.svelte';
 	import ActionButton from '../../../primitive/ActionButton.svelte';
 	import FormField from '../../../primitive/FormField.svelte';
-	import { getAddressByCoordsMethod } from '../../../../routes/api/geocode/methods';
+	import type { Event, Category } from '$lib/types/event';
 
-	export let data = {
+	export let data: Partial<Event> = {
 		name: '',
 		address: '',
 		description: '',
@@ -22,158 +24,259 @@
 			mediaId: ''
 		}
 	};
-	export let categories = [];
-	export let location = {
+	export let categories: Category[] = [];
+	export let location: {
+		address: string;
+		coords: string;
+	} = {
 		address: '',
 		coords: ''
-	}
+	};
 	export let isEditMode: boolean = false;
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher<{
+		submitForm: { formData: Record<string, any> };
+		openMapModal: void;
+	}>();
 
-	let formData = {};
-	let selectedEventName = '';
-	let selectedEventAddress = '';
-	let selectedEventCoords = ''
-	let selectedEventData = '';
-	let selectedEventDescription = '';
-	let selectedEventType: string[] = [];
-	let selectedEventCategoryId = '';
+	let formData: Record<string, any> = {};
+	let selectedEventName: string = '';
+	let selectedEventAddress: string = '';
+	let selectedEventCoords: string = '';
+	let selectedEventData: string = '';
+	let selectedEventDescription: string = '';
+	let selectedEventType: string = ''; // Изменено с массива на строку
+	let selectedEventCategoryId: string = '';
+	let formErrors: Record<string, string> = {};
 
+	// Инициализация формы при изменении данных
 	$: {
-		selectedEventName = data.name || '';
-		selectedEventAddress = data.address || '';
-		selectedEventDescription = data.description || '';
+		// Инициализируем поля формы данными из props
+		if (data.name !== undefined) selectedEventName = data.name || '';
+		if (data.description !== undefined) selectedEventDescription = data.description || '';
 
+		// Приоритет: location > data > пустая строка
 		if (location.address) {
-			console.log(location.address);
-			selectedEventAddress = location.address
-			selectedEventCoords = location.coords
+			selectedEventAddress = location.address;
+			selectedEventCoords = location.coords;
 		} else if (data.address) {
-			selectedEventAddress = data.address
-			selectedEventCoords = data.coordinates
+			selectedEventAddress = data.address;
+			selectedEventCoords = data.coordinates || '';
 		} else {
-			selectedEventAddress = ''
-			selectedEventCoords = ''
+			selectedEventAddress = '';
+			selectedEventCoords = '';
 		}
-		getCoordsByAddress(selectedEventAddress)
 
+		// Обрабатываем дату
 		if (data.scheduledFor) {
 			selectedEventData = formatISOtoString(data.scheduledFor) || '';
+		} else {
+			selectedEventData = '';
 		}
-		if (data.category?.name) {
-			selectedEventType = [
-				eventTypesListOptions.find((item) => item.value === data.category.verbose)
-			];
-			selectedEventCategoryId = categories.find(
-				(item) => item.verbose === data.category.verbose
-			)?.id;
+
+		// Обрабатываем категорию
+		if (data.category?.verbose) {
+			selectedEventType = data.category.verbose;
+			const category = categories.find((item) => item.verbose === data.category?.verbose);
+			selectedEventCategoryId = category?.id || '';
+		} else {
+			selectedEventType = '';
+			selectedEventCategoryId = '';
 		}
 	}
 
-	const submitForm = (e: Event) => {
+	// Сброс формы при переходе в режим создания
+	$: if (!isEditMode) {
+		selectedEventName = '';
+		selectedEventAddress = '';
+		selectedEventCoords = '';
+		selectedEventData = '';
+		selectedEventDescription = '';
+		selectedEventType = '';
+		selectedEventCategoryId = '';
+		formErrors = {};
+	}
+
+	// Валидация формы
+	const validateForm = (): boolean => {
+		formErrors = {};
+
+		if (!selectedEventName.trim()) {
+			formErrors.name = 'Название события обязательно';
+		}
+
+		if (!selectedEventAddress.trim()) {
+			formErrors.address = 'Адрес обязателен';
+		}
+
+		if (!selectedEventData) {
+			formErrors.scheduledFor = 'Дата обязательна';
+		}
+
+		if (!selectedEventType) {
+			formErrors.category = 'Тип события обязателен';
+		}
+
+		if (!selectedEventDescription.trim()) {
+			formErrors.description = 'Описание обязательно';
+		}
+
+		return Object.keys(formErrors).length === 0;
+	};
+
+	const submitForm = (e: SubmitEvent) => {
 		e.preventDefault();
 
+		if (!validateForm()) {
+			notifications.error('Ошибка валидации', 'Пожалуйста, заполните все обязательные поля');
+			return;
+		}
+
 		formData = {
-			name: selectedEventName || '',
-			address: selectedEventAddress || '',
-			scheduledFor: formatStringToISOString(selectedEventData) || '',
-			description: selectedEventDescription || '',
+			name: selectedEventName.trim(),
+			address: selectedEventAddress.trim(),
+			scheduledFor: formatStringToISOString(selectedEventData),
+			description: selectedEventDescription.trim(),
 			coordinates: selectedEventCoords,
-			categoryId: selectedEventCategoryId || ''
+			categoryId: selectedEventCategoryId
 		};
 
-		if (isEditMode) {
+		if (isEditMode && data.id) {
 			formData.id = data.id;
 		}
-		dispatch('submitForm', formData);
+
+		notifications.success('Форма отправлена', 'Данные формы успешно подготовлены для отправки');
+
+		dispatch('submitForm', { formData });
 	};
 
-	const changeEventType = (e) => {
-		selectedEventType = [e.detail];
-		selectedEventCategoryId = categories.find((item) => item.verbose === e.detail).id;
+	const changeEventType = (e: CustomEvent<string | string[]>) => {
+		const value = Array.isArray(e.detail) ? e.detail[0] : e.detail;
+		selectedEventType = value;
+		const category = categories.find((item) => item.verbose === value);
+		selectedEventCategoryId = category?.id || '';
+
+		// Очищаем ошибку при выборе
+		if (formErrors.category) {
+			delete formErrors.category;
+			formErrors = { ...formErrors };
+		}
 	};
+
 	const resetForm = () => {
 		formData = {};
 		selectedEventName = '';
 		selectedEventAddress = '';
 		selectedEventData = '';
 		selectedEventDescription = '';
-		selectedEventType = [];
+		selectedEventType = '';
+		selectedEventCategoryId = '';
+		formErrors = {};
 
 		goto('/events');
 	};
+
 	const openMapModal = () => {
 		dispatch('openMapModal');
 	};
-	const getCoordsByAddress = (event) => {
-		console.log('Поиск координат для:', event.detail);
-		const data = {
-			apikey: `3491db01-7fa8-4797-add0-9fbd22112c3f`,
-			geocode: event.detail,
-			format: "json"
+
+	// Обработчики изменения полей с очисткой ошибок
+	const handleNameChange = (e: CustomEvent<string>) => {
+		selectedEventName = e.detail;
+		if (formErrors.name) {
+			delete formErrors.name;
+			formErrors = { ...formErrors };
 		}
-		getAddressByCoordsMethod(data).then((res) => {
-			const locationsResponse = res || {}
-			const featureMember = locationsResponse.featureMember || []
-			const geoObject = featureMember[0].GeoObject
-			console.log(geoObject)
-			location.address = `${geoObject.description}, ${geoObject.name}`
-			location.coords = event
-		}).catch((err) => {
-			console.log(err);
-		})
-		// Здесь ваш код для геокодирования
+	};
+
+	const handleAddressChange = (e: CustomEvent<string>) => {
+		selectedEventAddress = e.detail;
+		if (formErrors.address) {
+			delete formErrors.address;
+			formErrors = { ...formErrors };
+		}
+	};
+
+	const handleDateChange = (e: CustomEvent<string>) => {
+		selectedEventData = e.detail;
+		if (formErrors.scheduledFor) {
+			delete formErrors.scheduledFor;
+			formErrors = { ...formErrors };
+		}
+	};
+
+	const handleDescriptionChange = (e: CustomEvent<string>) => {
+		selectedEventDescription = e.detail;
+		if (formErrors.description) {
+			delete formErrors.description;
+			formErrors = { ...formErrors };
+		}
 	};
 </script>
 
 <form on:submit={submitForm}>
 	<FormField
-		label="Событие"
+		label="Событие *"
 		type="text"
 		value={selectedEventName}
 		placeholder="Введите название события"
-		on:onChange={(e) => selectedEventName = e.detail}
+		required
+		on:onChange={handleNameChange}
 	/>
+	{#if formErrors.name}
+		<div class="error-message">{formErrors.name}</div>
+	{/if}
 
 	<FormField
-		label="Адрес"
+		label="Адрес *"
 		type="text"
 		value={selectedEventAddress}
 		placeholder="Введите адрес"
-		delay={1000}
-		on:onChange={getCoordsByAddress}
+		required
+		on:onChange={handleAddressChange}
 	/>
-	<button on:click={openMapModal}>Указать место на карте</button>
+	{#if formErrors.address}
+		<div class="error-message">{formErrors.address}</div>
+	{/if}
+
+	<button type="button" class="map-button" on:click={openMapModal}>
+		🗺️ Указать место на карте
+	</button>
 
 	<FormField
-		label="Дата"
+		label="Дата *"
 		type="datetime-local"
 		value={selectedEventData}
 		required
-		on:onChange={(e) => selectedEventData = e.detail}
+		on:onChange={handleDateChange}
 	/>
+	{#if formErrors.scheduledFor}
+		<div class="error-message">{formErrors.scheduledFor}</div>
+	{/if}
 
 	<Select
 		options={eventTypesListOptions}
-		bind:selected={selectedEventType}
+		selected={[selectedEventType]}
 		placeholder="Выберите тип события"
 		on:change={changeEventType}
 	/>
+	{#if formErrors.category}
+		<div class="error-message">{formErrors.category}</div>
+	{/if}
 
 	<FormField
-		label="Описание"
+		label="Описание *"
 		type="textarea"
-		bind:value={selectedEventDescription}
+		value={selectedEventDescription}
 		placeholder="Введите описание"
-		on:onChange={(e) => selectedEventDescription = e.detail}
+		required
+		on:onChange={handleDescriptionChange}
 	/>
+	{#if formErrors.description}
+		<div class="error-message">{formErrors.description}</div>
+	{/if}
 
-	<ActionButton
-		onCancel={resetForm}
-		onSubmit={submitForm}
-		submitLabel={isEditMode ? 'Сохранить' : 'Создать'}
-	/>
+	<ActionButton onCancel={resetForm} submitLabel={isEditMode ? 'Сохранить' : 'Создать'} />
 </form>
 
 <style>
@@ -183,7 +286,26 @@
 		gap: 1.5rem;
 	}
 
-	button {
-		text-align: right;
+	.map-button {
+		background: #0070f3;
+		color: white;
+		border: none;
+		padding: 0.75rem 1rem;
+		border-radius: 4px;
+		cursor: pointer;
+		font-size: 0.9rem;
+		transition: background 0.2s ease;
+		align-self: flex-start;
+	}
+
+	.map-button:hover {
+		background: #0056b3;
+	}
+
+	.error-message {
+		color: #dc3545;
+		font-size: 0.875rem;
+		margin-top: -0.5rem;
+		margin-bottom: 0.5rem;
 	}
 </style>

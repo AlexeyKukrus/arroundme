@@ -1,19 +1,20 @@
 <script lang="ts">
 	// Select
-
 	import { createEventDispatcher } from 'svelte';
 
-	export let options = [];
-	export let selected = [];
-	export let multiple = false;
-	export let placeholder = 'Выберите...';
+	export let options: Array<{ value: string; label: string }> = [];
+	export let selected: string[] = [];
+	export let multiple: boolean = false;
+	export let placeholder: string = 'Выберите...';
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher<{
+		change: string | string[];
+	}>();
 
-	function handleChange(e) {
-		const selectElement = e.currentTarget;
+	function handleChange(e: Event) {
+		const selectElement = e.currentTarget as HTMLSelectElement;
 		const selectedValues = Array.from(selectElement.selectedOptions).map((option) => option.value);
-		const value = multiple ? selectedValues : selectedValues[0] || null;
+		const value = multiple ? selectedValues : selectedValues[0] || '';
 		dispatch('change', value);
 	}
 </script>

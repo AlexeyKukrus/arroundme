@@ -1,7 +1,6 @@
 import { HttpError } from '../models/http-error-model';
+import { ENV_CONFIG } from '../lib/config/environment';
 
-const API_URL: string = 'https://aroundme.space/api/v1';
-const GEOCODE_URL: string = 'https://geocode-maps.yandex.ru/v1';
 type FetchConfig = {
 	method: string;
 	headers: Record<string, string>;
@@ -75,8 +74,9 @@ export async function fetchFromServer(url: string, params: ServerFetchParams): P
 		config.body = JSON.stringify(await request.json());
 	}
 
-	return await fetch(`${API_URL}/${url}`, config);
+	return await fetch(`${ENV_CONFIG.apiBaseUrl}/${url}`, config);
 }
+
 export async function fetchFromGeocode(url: string, params: ServerFetchParams): Promise<Response> {
 	const { cookies, fetch, request } = params;
 
@@ -91,7 +91,7 @@ export async function fetchFromGeocode(url: string, params: ServerFetchParams): 
 		config.body = JSON.stringify(await request.json());
 	}
 
-	return await fetch(`${GEOCODE_URL}/${url}`, config);
+	return await fetch(`${ENV_CONFIG.geocodeBaseUrl}/${url}`, config);
 }
 
 export const fetchFromAuth = async (
