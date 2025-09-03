@@ -1,4 +1,7 @@
-import { PRIVATE_API_BASE_URL, PRIVATE_GEOCODE_BASE_URL } from '$env/static/private';
+import { env } from '$env/dynamic/private';
+
+const API_BASE_URL = env.PRIVATE_API_BASE_URL || '';
+const GEOCODE_BASE_URL = env.PRIVATE_GEOCODE_BASE_URL || '';
 
 type FetchConfig = {
 	method: string;
@@ -34,7 +37,10 @@ export async function fetchFromServer(url: string, params: ServerFetchParams): P
 		}
 	}
 
-	return await fetch(`${PRIVATE_API_BASE_URL}/${url}`, config);
+	if (!API_BASE_URL) {
+		throw new Error('PRIVATE_API_BASE_URL is not set');
+	}
+	return await fetch(`${API_BASE_URL}/${url}`, config);
 }
 
 export async function fetchFromGeocode(url: string, params: ServerFetchParams): Promise<Response> {
@@ -56,5 +62,8 @@ export async function fetchFromGeocode(url: string, params: ServerFetchParams): 
 		}
 	}
 
-	return await fetch(`${PRIVATE_GEOCODE_BASE_URL}/${url}`, config);
+	if (!GEOCODE_BASE_URL) {
+		throw new Error('PRIVATE_GEOCODE_BASE_URL is not set');
+	}
+	return await fetch(`${GEOCODE_BASE_URL}/${url}`, config);
 }
