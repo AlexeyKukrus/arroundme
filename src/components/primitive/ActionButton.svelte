@@ -2,14 +2,13 @@
 	// ActionButton
 
 	export let onCancel: () => void;
-	export let onSubmit: () => void;
 	export let submitLabel: string = 'Сохранить';
 	export let cancelLabel: string = 'Отмена';
 </script>
 
 <div class="action-buttons">
 	<button type="button" on:click={onCancel} class="cancel-btn">{cancelLabel}</button>
-	<button type="submit" class="submit-btn" on:click={onSubmit}>
+	<button type="submit" class="submit-btn">
 		{submitLabel}
 	</button>
 </div>

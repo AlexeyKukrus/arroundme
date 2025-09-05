@@ -5,6 +5,7 @@
 	import MobileNavigation from '../components/ui/Navigation/components/MobileNavigation.svelte';
 	import DesktopNavigation from '../components/ui/Navigation/components/DesktopNavigation.svelte';
 	import AuthFormModal from '../components/ui/AuthFormModal/AuthFormModal.svelte';
+	import NotificationsContainer from '../components/ui/Notifications/NotificationsContainer.svelte';
 	import '../main.css';
 
 	let isMobile = false;
@@ -45,3 +46,5 @@
 {#if $showAuthModal}
 	<AuthFormModal />
 {/if}
+
+<NotificationsContainer />

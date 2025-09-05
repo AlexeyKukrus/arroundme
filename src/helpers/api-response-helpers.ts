@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import { error } from '@sveltejs/kit';
 import { HttpError } from '../models/http-error-model';
+import { isValidDateHelper } from './helpers';
 
 type ErrorDetail = {
 	label?: string;
@@ -170,4 +171,67 @@ export const processApiResponse = async (response: ApiResponse): Promise<any> =>
 	}
 
 	return isJson ? jsonData : response;
+};
+
+export const getQueryParamsString = (aParams) => {
+	const paramsArray = [];
+	let paramsString = '';
+	const checkParam = (aValue) => {
+		let isValid = false;
+
+		if (!!aValue) {
+			if (aValue instanceof Date) {
+				if (!isNaN(aValue)) {
+					isValid = true;
+				}
+			} else {
+				isValid = true;
+			}
+		}
+		if (typeof aValue === 'boolean') {
+			isValid = true;
+		}
+		if (typeof aValue === 'number') {
+			isValid = true;
+		}
+
+		return isValid;
+	};
+
+	const addParamsArray = (aKey, aValue) => {
+		const isValidDate = isValidDateHelper(aValue);
+		let validValue;
+
+		if (isValidDate) {
+			validValue = new Date(aValue).toISOString();
+		} else {
+			validValue = aValue;
+		}
+
+		const paramString = `${aKey}=${validValue}`;
+		paramsArray.push(paramString);
+	};
+
+	if (aParams && typeof aParams === 'object') {
+		for (let param in aParams) {
+			const item = aParams[param];
+
+			if (checkParam(item)) {
+				if (Array.isArray(item)) {
+					item.forEach((value) => {
+						if (checkParam(value)) {
+							addParamsArray(param, value);
+						}
+					});
+				} else {
+					addParamsArray(param, item);
+				}
+			}
+		}
+
+		paramsString = paramsArray.join('&');
+		paramsString = !!paramsString ? `?${paramsString}` : '';
+	}
+
+	return paramsString;
 };

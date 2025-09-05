@@ -29,3 +29,19 @@ export const formatStringToISOString = (dateString: string): string => {
 
 	return `${dateString}:00Z`;
 };
+
+export const isValidDateHelper = (aValue: string | Date): boolean => {
+	const regFullIso = new RegExp('^[0-9]+-[0-9]+-[0-9]+T[0-9]+:[0-9]+:[0-9]+\\.[0-9]+Z$');
+	let isValid = false;
+
+	if (aValue) {
+		if (aValue instanceof Date && !isNaN(aValue.getTime())) {
+			isValid = true;
+		}
+		if (typeof aValue === 'string' && regFullIso.test(aValue)) {
+			isValid = true;
+		}
+	}
+
+	return isValid;
+};

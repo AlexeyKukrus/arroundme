@@ -1,20 +1,22 @@
 <!-- YandexMapModal.svelte -->
-<script>
+<script lang="ts">
 	import { onMount, onDestroy, afterUpdate } from 'svelte';
 	import { browser } from '$app/environment';
+	import { PUBLIC_YANDEX_MAPS_API_KEY } from '$env/static/public';
+	import '../../../lib/types/yandex-maps.d.ts';
 
 	export let isOpen = false;
-	export let onClose;
-	export let onCoordinatesSelect;
+	export let onClose: (() => void) | undefined = undefined;
+	export let onCoordinatesSelect: ((coords: [number, number]) => void) | undefined = undefined;
 
-	let mapContainer;
-	let map = null;
-	let ymaps = null;
+	let mapContainer: HTMLDivElement | undefined = undefined;
+	let map: any = null;
+	let ymaps: any = null;
 	let isLoading = false;
-	let error = null;
+	let error: string | null = null;
 
-	let placemark = null;
-	let selectedCoords = null;
+	let placemark: any = null;
+	let selectedCoords: [number, number] | null = null;
 
 	const loadYmaps = () => {
 		if (!browser) return Promise.reject(new Error('Not in browser'));
@@ -37,7 +39,7 @@
 			window.ymapsLoading = true;
 
 			const script = document.createElement('script');
-			script.src = 'https://api-maps.yandex.ru/2.1/?apikey=YOUR_API_KEY&lang=ru_RU';
+			script.src = `https://api-maps.yandex.ru/2.1/?apikey=${PUBLIC_YANDEX_MAPS_API_KEY}&lang=ru_RU`;
 
 			script.onload = () => {
 				delete window.ymapsLoading;
@@ -86,13 +88,13 @@
 			map.events.add('click', handleMapClick);
 		} catch (err) {
 			console.error('❌ Ошибка инициализации карты:', err);
-			error = err.message;
+			error = err instanceof Error ? err.message : 'Unknown error';
 		} finally {
 			isLoading = false;
 		}
 	};
 
-	const handleMapClick = (e) => {
+	const handleMapClick = (e: any) => {
 		if (!ymaps || !map) return;
 
 		try {
@@ -148,7 +150,7 @@
 		initMap();
 	};
 
-	const handleKeydown = (e) => {
+	const handleKeydown = (e: KeyboardEvent) => {
 		if (e.key === 'Escape' && isOpen) {
 			handleClose();
 		}
@@ -182,19 +184,19 @@
 			<button class="close-button" on:click={handleClose} title="Закрыть"> × </button>
 
 			{#if error}
-				<div class="error-panel">
-					<div class="error-icon">⚠️</div>
+				<div class="info-panel error-panel">
+					<div class="info-icon">⚠️</div>
 					<h4>Ошибка</h4>
 					<p>{error}</p>
 					<button class="retry-button" on:click={handleRetry}> Повторить попытку </button>
 				</div>
 			{:else if isLoading}
-				<div class="loading-panel">
+				<div class="info-panel loading-panel">
 					<div class="spinner"></div>
 					<p>Загрузка карты...</p>
 				</div>
 			{:else if !selectedCoords}
-				<div class="hint-panel">
+				<div class="info-panel hint-panel">
 					<p>🗺 Кликните на карте для выбора точки</p>
 				</div>
 			{/if}
@@ -266,6 +268,10 @@
 		flex: 1;
 		padding: 0;
 	}
+	.map {
+		width: 900px;
+		height: 500px;
+	}
 
 	.map-container {
 		width: 100%;
@@ -315,5 +321,73 @@
 	.hint-panel {
 		background: #fff3cd;
 		border: 1px solid #ffeaa7;
+	}
+
+	/* Адаптивность для разных экранов */
+	@media (max-width: 1200px) {
+		.modal {
+			max-width: 90vw;
+			height: 80vh;
+		}
+
+		.map {
+			width: 100%;
+			height: 450px;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.modal {
+			max-width: 95vw;
+			height: 85vh;
+			border-radius: 8px;
+		}
+
+		.map {
+			width: 100%;
+			height: 350px;
+		}
+
+		.modal-content {
+			padding: 0;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.modal {
+			max-width: 100vw;
+			height: 90vh;
+			border-radius: 0;
+		}
+
+		.map {
+			width: 70vw;
+			height: 70vh;
+		}
+
+		.close-button {
+			top: 8px;
+			right: 8px;
+			width: 32px;
+			height: 32px;
+			font-size: 24px;
+		}
+	}
+
+	@media (max-width: 360px) {
+		.modal {
+			max-width: 100vw;
+			height: 95vh;
+		}
+
+		.map {
+			width: 300px;
+			height: 250px;
+		}
+
+		.select-button {
+			padding: 10px 20px;
+			font-size: 14px;
+		}
 	}
 </style>
