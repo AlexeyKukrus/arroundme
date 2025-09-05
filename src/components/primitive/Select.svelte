@@ -11,7 +11,7 @@
 		change: string | string[];
 	}>();
 
-	function handleChange(e: Event) {
+	const handleChange = (e: Event):void => {
 		const selectElement = e.currentTarget as HTMLSelectElement;
 		const selectedValues = Array.from(selectElement.selectedOptions).map((option) => option.value);
 		const value = multiple ? selectedValues : selectedValues[0] || '';

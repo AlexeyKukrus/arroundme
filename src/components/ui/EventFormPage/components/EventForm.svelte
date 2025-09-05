@@ -44,17 +44,14 @@
 	let selectedEventCoords: string = '';
 	let selectedEventData: string = '';
 	let selectedEventDescription: string = '';
-	let selectedEventType: string = ''; // Изменено с массива на строку
+	let selectedEventType: string = '';
 	let selectedEventCategoryId: string = '';
 	let formErrors: Record<string, string> = {};
 
-	// Инициализация формы при изменении данных
 	$: {
-		// Инициализируем поля формы данными из props
 		if (data.name !== undefined) selectedEventName = data.name || '';
 		if (data.description !== undefined) selectedEventDescription = data.description || '';
 
-		// Приоритет: location > data > пустая строка
 		if (location.address) {
 			selectedEventAddress = location.address;
 			selectedEventCoords = location.coords;
@@ -66,14 +63,12 @@
 			selectedEventCoords = '';
 		}
 
-		// Обрабатываем дату
 		if (data.scheduledFor) {
 			selectedEventData = formatISOtoString(data.scheduledFor) || '';
 		} else {
 			selectedEventData = '';
 		}
 
-		// Обрабатываем категорию
 		if (data.category?.verbose) {
 			selectedEventType = data.category.verbose;
 			const category = categories.find((item) => item.verbose === data.category?.verbose);
@@ -84,7 +79,6 @@
 		}
 	}
 
-	// Сброс формы при переходе в режим создания
 	$: if (!isEditMode) {
 		selectedEventName = '';
 		selectedEventAddress = '';
@@ -96,7 +90,6 @@
 		formErrors = {};
 	}
 
-	// Валидация формы
 	const validateForm = (): boolean => {
 		formErrors = {};
 
@@ -155,7 +148,6 @@
 		const category = categories.find((item) => item.verbose === value);
 		selectedEventCategoryId = category?.id || '';
 
-		// Очищаем ошибку при выборе
 		if (formErrors.category) {
 			delete formErrors.category;
 			formErrors = { ...formErrors };
@@ -179,7 +171,6 @@
 		dispatch('openMapModal');
 	};
 
-	// Обработчики изменения полей с очисткой ошибок
 	const handleNameChange = (e: CustomEvent<string>) => {
 		selectedEventName = e.detail;
 		if (formErrors.name) {

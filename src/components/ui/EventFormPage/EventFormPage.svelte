@@ -1,4 +1,6 @@
 <script lang="ts">
+	// EventFormPage
+	
 	import EventForm from './components/EventForm.svelte';
 	import { onMount } from 'svelte';
 	import { getEventByIdMethod } from '../../../routes/api/events/[id]/methods';
@@ -44,7 +46,7 @@
 				if (featureMember.length > 0 && featureMember[0]?.GeoObject) {
 					const geoObject = featureMember[0].GeoObject;
 					location.address = `${geoObject.description}, ${geoObject.name}`;
-					location.coords = coords.join('|'); // Преобразуем в строку для совместимости
+					location.coords = coords.join('|');
 
 					notifications.success('Адрес получен', 'Адрес успешно получен по координатам');
 				} else {
@@ -69,10 +71,8 @@
 				notifications.success('Событие создано', 'Событие успешно создано');
 			}
 
-			// Перенаправление на список событий
 			goto('/events');
 		} catch (error) {
-			// Ошибки уже обрабатываются в методах API
 			console.error('Ошибка при сохранении события:', error);
 		}
 	};
@@ -82,19 +82,15 @@
 
 	onMount(async () => {
 		try {
-			// Загружаем категории для всех случаев
 			const categoriesResponse = await getCategoriesListMethod();
 			categories = categoriesResponse.event_categories || [];
 
-			// Если режим редактирования, загружаем данные события
 			if (mode === 'edit') {
 				const response = await getEventByIdMethod(eventId);
 				if (response) {
-					// Бэкенд возвращает объект-обёртку { event: {...} }
 					event = (response as any).event || {};
 					event.id = eventId;
 
-					// Инициализируем location данными из события
 					if (event.coordinates) {
 						location.coords = event.coordinates;
 						location.address = event.address || '';

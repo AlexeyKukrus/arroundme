@@ -22,7 +22,7 @@
 	}
 
 	function initMap() {
-		// @ts-ignore - ymaps загружается динамически
+		// @ts-ignore
 		ymaps.ready(() => {
 			// @ts-ignore
 			const map = new ymaps.Map(mapContainer, {

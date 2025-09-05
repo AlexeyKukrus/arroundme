@@ -18,7 +18,6 @@
 			const response: EventsListResponse = await getEventsListMethod();
 			events = response.events || [];
 		} catch (error) {
-			// Ошибки уже обрабатываются в getEventsListMethod
 			events = [];
 		} finally {
 			loading = false;

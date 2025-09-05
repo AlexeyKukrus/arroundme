@@ -1,4 +1,5 @@
 <script lang="ts">
+	// FormField
 	import { createEventDispatcher, onDestroy } from 'svelte';
 
 	export let label: string;
@@ -6,7 +7,7 @@
 	export let value: string = '';
 	export let placeholder: string = '';
 	export let required: boolean = false;
-	export let delay: number = 0; // задержка в мс (0 = без задержки)
+	export let delay: number = 0;
 
 	const dispatch = createEventDispatcher();
 
