@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import { PUBLIC_YANDEX_MAPS_API_KEY } from '$env/static/public';
 	import type { Event } from '$lib/types/event';
+	import '../../../../lib/types/yandex-maps.d.ts';
 
 	export let events: Event[] = [];
 
@@ -22,10 +23,10 @@
 	}
 
 	function initMap() {
-		// @ts-ignore
-		ymaps.ready(() => {
-			// @ts-ignore
-			const map = new ymaps.Map(mapContainer, {
+		if (!window.ymaps) return;
+		window.ymaps.ready(() => {
+			const ym = window.ymaps;
+			const map = new ym.Map(mapContainer, {
 				center: [55.751244, 37.618423], // Москва
 				zoom: 10,
 				controls: ['zoomControl']
@@ -35,7 +36,7 @@
 				if (item.coordinates) {
 					const coords = parseCoordinates(item.coordinates);
 					if (coords) {
-						const placemark = new ymaps.Placemark(
+						const placemark = new ym.Placemark(
 							coords,
 							{ balloonContent: item.name },
 							{ preset: 'islands#redIcon' }
@@ -48,6 +49,71 @@
 			map.events.add('boundschange', () => {
 				console.log('Новая область карты:', map.getBounds());
 			});
+
+			function placeUser(coords: [number, number], source: string) {
+				console.log(`Моя геопозиция (${source}) [lat, lon]:`, coords);
+				try {
+					map.setCenter(coords, 12);
+					const mePlacemark = new ym.Placemark(
+						coords,
+						{ hintContent: 'Вы здесь' },
+						{ preset: 'islands#blueCircleIcon' }
+					);
+					map.geoObjects.add(mePlacemark);
+				} catch (e) {
+					console.warn('Не удалось центрировать карту по геопозиции:', e);
+				}
+			}
+
+			// Геолокация пользователя: сначала через браузер с высокой точностью, затем fallback через Yandex
+			if (navigator && navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(
+					(position) => {
+						const userCoords: [number, number] = [
+							position.coords.latitude,
+							position.coords.longitude
+						];
+						console.log('Точность браузера (метры):', position.coords.accuracy);
+						placeUser(userCoords, 'browser');
+					},
+					(error) => {
+						console.warn('Не удалось получить геопозицию через браузер:', error);
+						// fallback на Yandex geolocation
+						if (ym.geolocation && ym.geolocation.get) {
+							// сначала пытаемся через провайдера browser, затем yandex
+							ym.geolocation
+								.get({ provider: 'browser', mapStateAutoApply: false })
+								.then((res: any) => {
+									const coords = res.geoObjects.get(0).geometry.getCoordinates();
+									placeUser(coords, 'ym-browser');
+								})
+								.catch(() => {
+									return ym.geolocation.get({ provider: 'yandex', mapStateAutoApply: false }).then((res: any) => {
+										const coords = res.geoObjects.get(0).geometry.getCoordinates();
+										placeUser(coords, 'ym-yandex');
+									});
+								});
+						}
+					},
+					{ enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+				);
+			} else if (ym.geolocation && ym.geolocation.get) {
+				// Если браузерная геолокация недоступна
+				ym.geolocation
+					.get({ provider: 'browser', mapStateAutoApply: false })
+					.then((res: any) => {
+						const coords = res.geoObjects.get(0).geometry.getCoordinates();
+						placeUser(coords, 'ym-browser');
+					})
+					.catch(() => {
+						return ym.geolocation.get({ provider: 'yandex', mapStateAutoApply: false }).then((res: any) => {
+							const coords = res.geoObjects.get(0).geometry.getCoordinates();
+							placeUser(coords, 'ym-yandex');
+						});
+					});
+			} else {
+				console.warn('Геолокация не поддерживается этим браузером.');
+			}
 		});
 	}
 
