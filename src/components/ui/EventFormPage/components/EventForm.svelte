@@ -97,6 +97,10 @@
 			formErrors.name = 'Название события обязательно';
 		}
 
+		if (!selectedEventCoords) {
+			formErrors.coordinates = 'Укажите точку на карте';
+		}
+
 		if (!selectedEventAddress.trim()) {
 			formErrors.address = 'Адрес обязателен';
 		}
@@ -223,6 +227,7 @@
 		value={selectedEventAddress}
 		placeholder="Введите адрес"
 		required
+		disabled={!selectedEventCoords}
 		on:onChange={handleAddressChange}
 	/>
 	{#if formErrors.address}
@@ -246,7 +251,7 @@
 
 	<Select
 		options={eventTypesListOptions}
-		selected={[selectedEventType]}
+		selected={selectedEventType ? [selectedEventType] : []}
 		placeholder="Выберите тип события"
 		on:change={changeEventType}
 	/>

@@ -31,7 +31,9 @@
 	transition:
 		transform 0.2s ease,
 		box-shadow 0.2s ease;
-	max-height: fit-content;
+	/* Fixed height for consistent card sizes */
+	height: 180px;
+	overflow: hidden;
 	margin-bottom: 15px;
 }
 
@@ -46,28 +48,41 @@
 	height: 100%;
 	object-fit: cover;
 	border-radius: 4px 0 0 4px;
+	flex-shrink: 0;
 }
 
 .event-card-content {
 	padding: 15px;
 	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
 }
 
 .event-card h3 {
 	margin: 0 0 5px 0;
 	font-size: 1rem;
+	/* Keep title to one line */
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .event-date {
 	color: #666;
 	font-size: 0.8rem;
 	margin-bottom: 5px;
+	flex-shrink: 0;
 }
 
 .event-location {
 	font-size: 0.9rem;
 	color: #444;
 	margin-bottom: 10px;
+	/* Single-line ellipsis for address */
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .event-description {
@@ -75,6 +90,11 @@
 	color: #333;
 	font-size: 0.95rem;
 	line-height: 1.4;
+	/* Clamp description to 3 lines */
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }
 
 .empty-message {
@@ -163,10 +183,17 @@
 }
 
 @media (max-width: 767px) {
+	/* Smaller fixed height and image width on mobile */
+	.event-card {
+		height: 130px;
+	}
 	.event-image {
 		width: 130px;
 		height: 100%;
 		object-fit: cover;
 		border-radius: 4px 0 0 4px;
+	}
+	.event-description {
+		-webkit-line-clamp: 2;
 	}
 }
