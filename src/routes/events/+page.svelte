@@ -1,5 +1,5 @@
 <script>
-	import EventsListPage from '../../components/ui/EventsListPage/EventsListPage.svelte';
+    import { EventsList } from '@modules/events/index.js';
 </script>
 
-<EventsListPage />
+<EventsList />

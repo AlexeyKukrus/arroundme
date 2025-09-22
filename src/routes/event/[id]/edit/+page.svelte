@@ -1,15 +1,15 @@
 <script>
-	import EventFormPage from '../../../../components/ui/EventFormPage/EventFormPage.svelte';
-	import { updateEventByIdMethod } from '../../../api/events/[id]/methods.js';
-	import { goto } from '$app/navigation';
+    import { updateEventByIdMethod } from '@api/events/[id]/methods';
+    import { goto } from '$app/navigation';
+		import EventForm from '@modules/events/components/EventForm.svelte';
 
-	const updateEvent = (event) => {
-		const data = event.detail;
+    const updateEvent = (event: CustomEvent<any>) => {
+        const data = event.detail;
 
-		updateEventByIdMethod(data).then(() => {
-			goto('/events');
-		});
-	};
+        updateEventByIdMethod(data).then(() => {
+            goto('/events');
+        });
+    };
 </script>
 
-<EventFormPage mode="edit" on:submitForm={updateEvent} />
+<EventForm mode="edit" on:submitForm={updateEvent} />

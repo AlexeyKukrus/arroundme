@@ -1,5 +1,5 @@
-import { fetchFromGeocode } from '../../../helpers/server-fetch';
-import { processApiResponse } from '../../../helpers/api-response-helpers';
+import { fetchFromGeocode } from '@helpers/fetch/server-fetch';
+import { processApiResponse } from '@helpers/fetch/api-response-helpers';
 import { json } from '@sveltejs/kit';
 
 export async function GET({ url, cookies, fetch, request }) {

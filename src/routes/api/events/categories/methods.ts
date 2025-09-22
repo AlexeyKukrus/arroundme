@@ -1,4 +1,4 @@
-import { fetchFromClient } from '../../../../helpers/fetch';
+import { fetchFromClient } from '@helpers/fetch/fetch';
 
 export const getCategoriesListMethod = async () => {
 	try {

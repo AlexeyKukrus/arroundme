@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { user } from '../../../lib/stores/user';
+  import { user } from '@app/models/users/store';
   import { goto } from '$app/navigation';
 
   let name: string = $user?.name ?? '';

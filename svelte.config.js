@@ -8,7 +8,14 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		alias: {
+			'@app/*': 'src/*',
+			'@modules/*': 'src/modules/*',
+			'@shared/*': 'src/shared/*',
+			'@helpers/*': 'src/helpers/*',
+			'@api/*': 'src/routes/api/*'
+		}
 	}
 };
 

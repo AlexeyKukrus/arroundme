@@ -1,5 +1,5 @@
 <script lang="ts">
-	import EventViewPage from '../../../../components/ui/EventViewPage/EventViewPage.svelte';
+    import { EventsView } from '@modules/events';
 </script>
 
-<EventViewPage />
+<EventsView />

@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import { isAuthenticated, showAuthModal } from '../lib/stores/auth';
 	import { onMount } from 'svelte';
-	import { user } from '../lib/stores/user';
-	import MobileNavigation from '../components/ui/Navigation/components/MobileNavigation.svelte';
-	import DesktopNavigation from '../components/ui/Navigation/components/DesktopNavigation.svelte';
-	import AuthFormModal from '../components/ui/AuthFormModal/AuthFormModal.svelte';
-	import NotificationsContainer from '../components/ui/Notifications/NotificationsContainer.svelte';
+	import { browser } from '$app/environment';
+
+import { isAuthenticated, showAuthModal } from '@app/models/auth/store';
+import { user } from '@app/models/users/store';
+	import { Notifications, Header } from '@shared/ui';
+	import { AuthFormModal } from '@shared/modals';
+	
 	import '../main.css';
 
 	let isMobile = false;
@@ -35,12 +35,7 @@
 </script>
 
 <div class="app-container">
-	{#if isMobile}
-		<MobileNavigation />
-	{:else}
-		<DesktopNavigation />
-	{/if}
-
+	<Header />
 	<main class:mobile={isMobile} class:desktop={!isMobile}>
 		<slot />
 	</main>
@@ -50,4 +45,4 @@
 	<AuthFormModal />
 {/if}
 
-<NotificationsContainer />
+<Notifications />
