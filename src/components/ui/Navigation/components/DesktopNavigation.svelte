@@ -2,6 +2,8 @@
 	// DesktopNavigation
 	import { page } from '$app/stores';
 	import { navigationTabsList } from '../helpers/helper-options';
+	import AvatarMenu from './AvatarMenu.svelte';
+
 </script>
 
 <nav class="nav">
@@ -20,4 +22,7 @@
 			</button>
 		{/if}
 	{/each}
+
+	<div style="margin-top:auto"></div>
+	<AvatarMenu />
 </nav>

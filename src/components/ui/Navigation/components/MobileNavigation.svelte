@@ -1,6 +1,7 @@
 <script lang="ts">
 	// MobileNavigation
 	import MobileDrawerModal from '../modals/MobileDrawerModal.svelte';
+	import AvatarMenu from './AvatarMenu.svelte';
 
 	let isMenuOpen = false;
 
@@ -17,7 +18,7 @@
 
 	<div class="spacer"></div>
 
-	<div class="avatar-placeholder"></div>
+	<AvatarMenu />
 </header>
 
 <MobileDrawerModal bind:isOpen={isMenuOpen} onClose={closeMenu} />

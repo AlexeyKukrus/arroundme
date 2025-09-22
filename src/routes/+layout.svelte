@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { isAuthenticated, showAuthModal } from '$lib/stores/auth';
+	import { isAuthenticated, showAuthModal } from '../lib/stores/auth';
 	import { onMount } from 'svelte';
+	import { user } from '../lib/stores/user';
 	import MobileNavigation from '../components/ui/Navigation/components/MobileNavigation.svelte';
 	import DesktopNavigation from '../components/ui/Navigation/components/DesktopNavigation.svelte';
 	import AuthFormModal from '../components/ui/AuthFormModal/AuthFormModal.svelte';
@@ -17,6 +18,8 @@
 		} else {
 			isAuthenticated.set(true);
 		}
+
+		user.initIfEmpty();
 
 		if (browser) {
 			const checkMobile = () => {

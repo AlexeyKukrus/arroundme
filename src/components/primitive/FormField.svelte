@@ -8,6 +8,7 @@
 	export let placeholder: string = '';
 	export let required: boolean = false;
 	export let delay: number = 0;
+	export let disabled: boolean = false;
 
 	const dispatch = createEventDispatcher();
 
@@ -37,9 +38,9 @@
 	<label>
 		<span class="label-text">{label}</span>
 		{#if type === 'textarea'}
-			<textarea class="input" {placeholder} {required} {value} on:input={handleInput} />
+			<textarea class="input" {placeholder} {required} {value} {disabled} on:input={handleInput}></textarea>
 		{:else}
-			<input class="input" {type} {placeholder} {required} {value} on:input={handleInput} />
+			<input class="input" {type} {placeholder} {required} {value} {disabled} on:input={handleInput} />
 		{/if}
 	</label>
 </div>
