@@ -17,9 +17,13 @@
 	let hasBounds: boolean = false;
 	let lastBounds: [[number, number], [number, number]] | null = null;
 
-
-
-	function handleBoundsChange(event: CustomEvent<{ bounds: [[number, number], [number, number]]; center: [number, number]; zoom: number }>) {
+	function handleBoundsChange(
+		event: CustomEvent<{
+			bounds: [[number, number], [number, number]];
+			center: [number, number];
+			zoom: number;
+		}>
+	) {
 		const { bounds } = event.detail;
 		if (!bounds) return;
 		lastBounds = bounds;
@@ -33,7 +37,9 @@
 			const response: EventsListResponse = await getEventsListMethod();
 			events = response.events || [];
 			if (lastBounds) {
-				filtered = events.filter((e) => isInBounds(e.coordinates, lastBounds as [[number, number], [number, number]]));
+				filtered = events.filter((e) =>
+					isInBounds(e.coordinates, lastBounds as [[number, number], [number, number]])
+				);
 				hasBounds = true;
 			} else {
 				filtered = [];
@@ -56,7 +62,7 @@
 			window.addEventListener('resize', checkMobile);
 			return () => window.removeEventListener('resize', checkMobile);
 		}
-	})
+	});
 </script>
 
 <div class="events-list-page">

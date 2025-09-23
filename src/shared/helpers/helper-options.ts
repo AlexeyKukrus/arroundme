@@ -29,5 +29,3 @@ export const navigationTabsList: NavigationTabsList[] = [
 		label: 'Уведомления'
 	}
 ];
-
-

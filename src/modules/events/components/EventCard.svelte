@@ -16,7 +16,11 @@
 </script>
 
 <div class="event-card" on:click={handleClick}>
-	<img src={`https://aroundme.space/media/${item.category.mediaId}`} alt={item.name} class="event-image" />
+	<img
+		src={`https://aroundme.space/media/${item.category.mediaId}`}
+		alt={item.name}
+		class="event-image"
+	/>
 	<div class="event-card-content">
 		<h3>{title}</h3>
 		{#if item.scheduledFor}
@@ -33,4 +37,3 @@
 		{/if}
 	</div>
 </div>
-

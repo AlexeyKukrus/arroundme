@@ -7,13 +7,19 @@
 	export let onClose: () => void;
 </script>
 
-<div class="overlay" class:visible={isOpen} on:click={onClose} tabindex="0" aria-hidden={!isOpen}></div>
+<div
+	class="overlay"
+	class:visible={isOpen}
+	on:click={onClose}
+	tabindex="0"
+	aria-hidden={!isOpen}
+></div>
 
 <aside class="drawer" class:open={isOpen} role="dialog" aria-modal="true" aria-label="Навигация">
-    <nav class="mobile-nav" role="menu">
+	<nav class="mobile-nav" role="menu">
 		{#each navigationTabsList as { href, mobileIcon, label }}
 			{#if href}
-                <a {href} class="mobile-nav-item" on:click={onClose} role="menuitem" tabindex="0">
+				<a {href} class="mobile-nav-item" on:click={onClose} role="menuitem" tabindex="0">
 					<img
 						src={mobileIcon}
 						alt={label}
@@ -22,7 +28,7 @@
 					<span class="label">{label}</span>
 				</a>
 			{:else}
-                <button class="mobile-nav-item" on:click={onClose} role="menuitem">
+				<button class="mobile-nav-item" on:click={onClose} role="menuitem">
 					<img src={mobileIcon} alt={label} class="icon" />
 					<span class="label">{label}</span>
 				</button>
@@ -30,4 +36,3 @@
 		{/each}
 	</nav>
 </aside>
-

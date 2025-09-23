@@ -43,7 +43,9 @@
 					notifications.warning('Адрес не найден', 'Не удалось получить адрес по координатам');
 				}
 			})
-			.catch(() => notifications.error('Ошибка геокодирования', 'Не удалось получить адрес по координатам'));
+			.catch(() =>
+				notifications.error('Ошибка геокодирования', 'Не удалось получить адрес по координатам')
+			);
 	};
 
 	const handleSubmitForm = async (event: CustomEvent<{ formData: Record<string, any> }>) => {
@@ -79,7 +81,10 @@
 						location.address = event.address || '';
 					}
 				} else {
-					notifications.error('Ошибка загрузки', 'Не удалось загрузить данные события для редактирования');
+					notifications.error(
+						'Ошибка загрузки',
+						'Не удалось загрузить данные события для редактирования'
+					);
 				}
 			}
 		} catch (error) {
@@ -90,9 +95,18 @@
 
 <div class="create-event-page">
 	<h1>{title}</h1>
-	<EventForm data={event} {isEditMode} {categories} {location} on:submitForm={handleSubmitForm} on:openMapModal={openMapModal} />
+	<EventForm
+		data={event}
+		{isEditMode}
+		{categories}
+		{location}
+		on:submitForm={handleSubmitForm}
+		on:openMapModal={openMapModal}
+	/>
 </div>
 
-<MapModal bind:isOpen={isMapModalOpen} onClose={() => (isMapModalOpen = false)} onCoordinatesSelect={getAddressByCoords} />
-
-
+<MapModal
+	bind:isOpen={isMapModalOpen}
+	onClose={() => (isMapModalOpen = false)}
+	onCoordinatesSelect={getAddressByCoords}
+/>

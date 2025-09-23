@@ -1,5 +1,5 @@
 <script lang="ts">
-		import { fade, fly } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 	import { notifications } from '@shared/stores/notifications/store';
 
 	function close(id: string) {
@@ -45,7 +45,9 @@
 					<h4 class="notification-title">{notification.title}</h4>
 					<p class="notification-message">{notification.message}</p>
 				</div>
-				<button class="notification-close" on:click={() => close(notification.id)} title="Закрыть"> × </button>
+				<button class="notification-close" on:click={() => close(notification.id)} title="Закрыть">
+					×
+				</button>
 			</div>
 
 			{#if notification.action}
@@ -120,9 +122,22 @@
 		flex-shrink: 0;
 	}
 
-	.notification-content { flex: 1; min-width: 0; }
-	.notification-title { margin: 0 0 4px 0; font-size: 14px; font-weight: 600; color: #333; }
-	.notification-message { margin: 0; font-size: 13px; color: #666; line-height: 1.4; }
+	.notification-content {
+		flex: 1;
+		min-width: 0;
+	}
+	.notification-title {
+		margin: 0 0 4px 0;
+		font-size: 14px;
+		font-weight: 600;
+		color: #333;
+	}
+	.notification-message {
+		margin: 0;
+		font-size: 13px;
+		color: #666;
+		line-height: 1.4;
+	}
 
 	.notification-close {
 		background: none;
@@ -141,20 +156,69 @@
 		flex-shrink: 0;
 	}
 
-	.notification-close:hover { background: #f0f0f0; color: #666; }
+	.notification-close:hover {
+		background: #f0f0f0;
+		color: #666;
+	}
 
-	.notification-actions { margin-top: 12px; display: flex; gap: 8px; }
-	.notification-action-btn { background: #0070f3; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; transition: background 0.2s ease; }
-	.notification-action-btn:hover { background: #0056b3; }
+	.notification-actions {
+		margin-top: 12px;
+		display: flex;
+		gap: 8px;
+	}
+	.notification-action-btn {
+		background: #0070f3;
+		color: white;
+		border: none;
+		padding: 6px 12px;
+		border-radius: 4px;
+		font-size: 12px;
+		cursor: pointer;
+		transition: background 0.2s ease;
+	}
+	.notification-action-btn:hover {
+		background: #0056b3;
+	}
 
-	.notification-progress { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: rgba(0, 0, 0, 0.1); border-radius: 0 0 8px 8px; overflow: hidden; }
-	.notification-progress-bar { height: 100%; background: currentColor; animation: progress-shrink linear forwards; }
+	.notification-progress {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 2px;
+		background: rgba(0, 0, 0, 0.1);
+		border-radius: 0 0 8px 8px;
+		overflow: hidden;
+	}
+	.notification-progress-bar {
+		height: 100%;
+		background: currentColor;
+		animation: progress-shrink linear forwards;
+	}
 
-	@keyframes progress-shrink { from { width: 100%; } to { width: 0%; } }
+	@keyframes progress-shrink {
+		from {
+			width: 100%;
+		}
+		to {
+			width: 0%;
+		}
+	}
 
-	.notification-success { border-left-color: #28a745; color: #28a745; }
-	.notification-error { border-left-color: #dc3545; color: #dc3545; }
-	.notification-warning { border-left-color: #ffc107; color: #856404; }
-	.notification-info { border-left-color: #17a2b8; color: #17a2b8; }
+	.notification-success {
+		border-left-color: #28a745;
+		color: #28a745;
+	}
+	.notification-error {
+		border-left-color: #dc3545;
+		color: #dc3545;
+	}
+	.notification-warning {
+		border-left-color: #ffc107;
+		color: #856404;
+	}
+	.notification-info {
+		border-left-color: #17a2b8;
+		color: #17a2b8;
+	}
 </style>
-

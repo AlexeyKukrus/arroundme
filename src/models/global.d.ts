@@ -8,5 +8,3 @@ declare global {
 		ymapsLoading?: boolean;
 	}
 }
-
-

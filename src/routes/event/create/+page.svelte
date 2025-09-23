@@ -35,7 +35,9 @@
 					notifications.warning('Адрес не найден', 'Не удалось получить адрес по координатам');
 				}
 			})
-			.catch(() => notifications.error('Ошибка геокодирования', 'Не удалось получить адрес по координатам'));
+			.catch(() =>
+				notifications.error('Ошибка геокодирования', 'Не удалось получить адрес по координатам')
+			);
 	};
 
 	async function handleSubmitForm(e: CustomEvent<{ formData: Record<string, any> }>) {
@@ -60,16 +62,25 @@
 </script>
 
 <div class="create-event-page">
-	<Title size="lg" text="Создать событие"/>
-	<EventForm {categories} {location} on:openMapModal={openMapModal} on:submitForm={handleSubmitForm} />
+	<Title size="lg" text="Создать событие" />
+	<EventForm
+		{categories}
+		{location}
+		on:openMapModal={openMapModal}
+		on:submitForm={handleSubmitForm}
+	/>
 </div>
 
-<MapModal bind:isOpen={isMapModalOpen} onClose={() => (isMapModalOpen = false)} onCoordinatesSelect={getAddressByCoords} />
+<MapModal
+	bind:isOpen={isMapModalOpen}
+	onClose={() => (isMapModalOpen = false)}
+	onCoordinatesSelect={getAddressByCoords}
+/>
 
 <style>
-    .create-event-page {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 2rem;
-    }
+	.create-event-page {
+		max-width: 600px;
+		margin: 0 auto;
+		padding: 2rem;
+	}
 </style>

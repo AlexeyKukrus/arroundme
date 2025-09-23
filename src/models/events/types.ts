@@ -16,5 +16,3 @@ export interface Category {
 	name: string;
 	verbose: string;
 }
-
-

@@ -7,7 +7,7 @@
 
 	import { Notifications, Header } from '@shared/ui';
 	import { AuthFormModal } from '@shared/modals';
-	
+
 	import '../main.css';
 
 	let isMobile = false;

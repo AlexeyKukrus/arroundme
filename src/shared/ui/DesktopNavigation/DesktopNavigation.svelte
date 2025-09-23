@@ -3,7 +3,6 @@
 	import { page } from '$app/stores';
 	import { navigationTabsList } from '@shared/helpers/helper-options';
 	import { AvatarMenu } from '@shared/ui';
-
 </script>
 
 <nav class="nav">
@@ -26,4 +25,3 @@
 	<div style="margin-top:auto"></div>
 	<AvatarMenu />
 </nav>
-

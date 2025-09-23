@@ -30,7 +30,6 @@ npm run dev
 - **Тестирование**: Vitest + Playwright
 - **Линтинг**: ESLint + Prettier
 
-
 ## 🔧 Доступные команды
 
 ```bash
@@ -130,11 +129,22 @@ src/
 
 ```svelte
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { getEventsListMethod } from '@api/events/methods';
-  import { EventsList } from '@modules/events';
-  let items = []; let loading = false; let error: string | null = null;
-  onMount(async () => { try { loading = true; items = (await getEventsListMethod()).events; } catch { error = 'Ошибка'; } finally { loading = false; } });
+	import { onMount } from 'svelte';
+	import { getEventsListMethod } from '@api/events/methods';
+	import { EventsList } from '@modules/events';
+	let items = [];
+	let loading = false;
+	let error: string | null = null;
+	onMount(async () => {
+		try {
+			loading = true;
+			items = (await getEventsListMethod()).events;
+		} catch {
+			error = 'Ошибка';
+		} finally {
+			loading = false;
+		}
+	});
 </script>
 
 <EventsList {items} {loading} hasBounds={true} isMobile={false} />
@@ -150,10 +160,10 @@ src/
 
 ```svelte
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
-  export let items = [];
-  const dispatch = createEventDispatcher<{ select: { id: string } }>();
-  const select = (id: string) => dispatch('select', { id });
+	import { createEventDispatcher } from 'svelte';
+	export let items = [];
+	const dispatch = createEventDispatcher<{ select: { id: string } }>();
+	const select = (id: string) => dispatch('select', { id });
 </script>
 ```
 
@@ -163,7 +173,10 @@ src/
 
 ```ts
 export interface ApiResponse<T = any> {
-  success: boolean; data?: T; error?: string; message?: string;
+	success: boolean;
+	data?: T;
+	error?: string;
+	message?: string;
 }
 ```
 
@@ -185,7 +198,9 @@ export interface ApiResponse<T = any> {
 - Пример (`ConfirmationModal`):
 
 ```ts
-$: if (browser && isOpen) { document.body.style.overflow = 'hidden'; }
+$: if (browser && isOpen) {
+	document.body.style.overflow = 'hidden';
+}
 ```
 
 ### Именование и стиль

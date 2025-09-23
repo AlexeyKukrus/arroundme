@@ -1,4 +1,3 @@
-
 import { json } from '@sveltejs/kit';
 import type { RequestEvent } from '@sveltejs/kit';
 import { fetchFromServer } from '@helpers/fetch/server-fetch';

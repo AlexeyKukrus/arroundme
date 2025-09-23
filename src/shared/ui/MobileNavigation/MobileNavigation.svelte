@@ -22,4 +22,3 @@
 </header>
 
 <MobileDrawerModal bind:isOpen={isMenuOpen} onClose={closeMenu} />
-

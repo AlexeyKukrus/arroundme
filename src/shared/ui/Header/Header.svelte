@@ -22,5 +22,3 @@
 {:else}
 	<DesktopNavigation />
 {/if}
-
-

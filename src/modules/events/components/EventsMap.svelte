@@ -21,8 +21,6 @@
 	let eventPlacemarks: any[] = [];
 	let userPlacemark: any = null;
 
-
-
 	function loadYmaps() {
 		if (window.ymaps) return Promise.resolve(window.ymaps);
 		return new Promise((resolve, reject) => {
@@ -52,12 +50,14 @@
 			};
 			document.head.appendChild(script);
 		});
-	};
+	}
 
 	function clearEventPlacemarks() {
 		if (!map || !eventPlacemarks.length) return;
 		eventPlacemarks.forEach((p) => {
-			try { map.geoObjects.remove(p); } catch {}
+			try {
+				map.geoObjects.remove(p);
+			} catch {}
 		});
 		eventPlacemarks = [];
 	}
@@ -93,14 +93,14 @@
 
 			renderEventMarkers(events);
 
-			const emitBounds:() => void = () => {
+			const emitBounds: () => void = () => {
 				try {
 					const bounds = map.getBounds();
 					const center = map.getCenter();
 					const zoom = map.getZoom();
 					dispatch('boundsChange', { bounds, center, zoom });
 				} catch {}
-			}
+			};
 
 			map.events.add('boundschange', () => {
 				emitBounds();
@@ -144,10 +144,12 @@
 									placeUser(coords, 'ym-browser');
 								})
 								.catch(() => {
-									return ym.geolocation.get({ provider: 'yandex', mapStateAutoApply: false }).then((res: any) => {
-										const coords = res.geoObjects.get(0).geometry.getCoordinates();
-										placeUser(coords, 'ym-yandex');
-									});
+									return ym.geolocation
+										.get({ provider: 'yandex', mapStateAutoApply: false })
+										.then((res: any) => {
+											const coords = res.geoObjects.get(0).geometry.getCoordinates();
+											placeUser(coords, 'ym-yandex');
+										});
 								});
 						}
 					},
@@ -161,10 +163,12 @@
 						placeUser(coords, 'ym-browser');
 					})
 					.catch(() => {
-						return ym.geolocation.get({ provider: 'yandex', mapStateAutoApply: false }).then((res: any) => {
-							const coords = res.geoObjects.get(0).geometry.getCoordinates();
-							placeUser(coords, 'ym-yandex');
-						});
+						return ym.geolocation
+							.get({ provider: 'yandex', mapStateAutoApply: false })
+							.then((res: any) => {
+								const coords = res.geoObjects.get(0).geometry.getCoordinates();
+								placeUser(coords, 'ym-yandex');
+							});
 					});
 			} else {
 				console.warn('Геолокация не поддерживается этим браузером.');

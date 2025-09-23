@@ -74,8 +74,8 @@ export const processApiResponse = async (response: ApiResponse): Promise<any> =>
 	const contentType = response.headers.get('content-type') || '';
 	const isJson = contentType.includes('application/json');
 
-    const responseText = `${status} ${statusText} | ${time}ms | ${method} ${url}`;
-    console.log(responseText);
+	const responseText = `${status} ${statusText} | ${time}ms | ${method} ${url}`;
+	console.log(responseText);
 
 	if (['POST', 'PUT', 'PATCH'].includes(method)) {
 		logTerminal('Request body:', body);
