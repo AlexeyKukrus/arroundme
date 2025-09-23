@@ -1,6 +1,7 @@
-import { fetchFromClient } from '../../../helpers/fetch';
-import { notifications } from '../../../lib/stores/notifications';
-import type { Event } from '$lib/types/event';
+import { fetchFromClient } from '@helpers/fetch/fetch';
+import { processApiResponse } from '@helpers/fetch/api-response-helpers';
+import { notifications } from '@shared/stores/notifications/store';
+import type { Event } from '@app/models/events/types';
 
 export interface ApiResponse<T = any> {
 	success: boolean;
@@ -16,7 +17,7 @@ export interface EventsListResponse extends ApiResponse {
 export const getEventsListMethod = async (): Promise<EventsListResponse> => {
 	try {
 		const response = await fetchFromClient('GET', `/api/events`);
-		const json = await response.json();
+		const json = await processApiResponse(response);
 
 		notifications.success(
 			'События загружены',
@@ -34,12 +35,9 @@ export const getEventsListMethod = async (): Promise<EventsListResponse> => {
 };
 
 export const createEventMethod = async (data: Event): Promise<ApiResponse<Event>> => {
-	// !TODO
-	// validateOrThrow(eventCreateFormScheme, body)
-
 	try {
 		const response = await fetchFromClient('POST', '/api/events', data);
-		const result = await response.json();
+		const result = await processApiResponse(response);
 
 		notifications.success('Событие создано', `Событие "${data.name}" успешно создано`);
 
@@ -59,7 +57,7 @@ export const updateEventMethod = async (
 ): Promise<ApiResponse<Event>> => {
 	try {
 		const response = await fetchFromClient('PUT', `/api/events/${id}`, data);
-		const result = await response.json();
+		const result = await processApiResponse(response);
 
 		notifications.success(
 			'Событие обновлено',
@@ -79,7 +77,7 @@ export const updateEventMethod = async (
 export const deleteEventMethod = async (id: string): Promise<ApiResponse<void>> => {
 	try {
 		const response = await fetchFromClient('DELETE', `/api/events/${id}`);
-		const result = await response.json();
+		const result = await processApiResponse(response);
 
 		notifications.success('Событие удалено', 'Событие успешно удалено');
 

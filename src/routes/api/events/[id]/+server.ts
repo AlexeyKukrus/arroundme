@@ -1,6 +1,6 @@
-import { fetchFromServer } from '../../../../helpers/server-fetch';
-import { processApiResponse } from '../../../../helpers/api-response-helpers';
-import type { RequestHandler } from './$types';
+import { fetchFromServer } from '@helpers/fetch/server-fetch';
+import { processApiResponse } from '@helpers/fetch/api-response-helpers';
+import type { RequestHandler } from '@sveltejs/kit';
 import { json } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async (params) => {

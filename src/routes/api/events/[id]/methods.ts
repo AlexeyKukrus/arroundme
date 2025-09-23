@@ -1,6 +1,5 @@
-import { fetchFromClient } from '../../../../helpers/fetch';
-import type { Event } from '$lib/types/event';
-// import { validateOrThrow } from '../../../../helpers/validation-helpers';
+import { fetchFromClient } from '@helpers/fetch/fetch';
+import type { Event } from '@app/models/events/types';
 
 export const getEventByIdMethod = async (id: string): Promise<Event> => {
 	const response = await fetchFromClient('GET', `/api/events/${id}`);
@@ -28,7 +27,7 @@ export const updateEventByIdMethod = async (data: Event) => {
 	}
 };
 
-export const deleteEventByIdMethod = async (id) => {
+export const deleteEventByIdMethod = async (id: string) => {
 	try {
 		const response = await fetchFromClient('DELETE', `/api/events/${id}`);
 		return await response.json();
