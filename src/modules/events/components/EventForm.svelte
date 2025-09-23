@@ -1,4 +1,6 @@
 <script lang="ts">
+	// EventForm.svelte
+
 	import { goto } from '$app/navigation';
 	import { createEventDispatcher } from 'svelte';
 	import { formatISOtoString, formatStringToISOString } from '@helpers/helpers.js';

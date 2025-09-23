@@ -45,3 +45,23 @@ export const isValidDateHelper = (aValue: string | Date): boolean => {
 
 	return isValid;
 };
+
+// Coordinates helpers
+export function parseCoordinates(coordString: string): [number, number] | null {
+	if (!coordString) return null;
+	const coords = coordString.split('|').map(Number);
+	if (coords.length !== 2 || coords.some(isNaN)) return null;
+	return [coords[0], coords[1]];
+}
+
+export function isInBounds(
+	coordinates: string | null | undefined,
+	bounds: [[number, number], [number, number]]
+): boolean {
+	if (!coordinates) return false;
+	const coords = parseCoordinates(coordinates);
+	if (!coords) return false;
+	const [[minLat, minLon], [maxLat, maxLon]] = bounds;
+	const [lat, lon] = coords;
+	return lat >= minLat && lat <= maxLat && lon >= minLon && lon <= maxLon;
+}

@@ -35,9 +35,6 @@ export const getEventsListMethod = async (): Promise<EventsListResponse> => {
 };
 
 export const createEventMethod = async (data: Event): Promise<ApiResponse<Event>> => {
-	// !TODO
-	// validateOrThrow(eventCreateFormScheme, body)
-
 	try {
     const response = await fetchFromClient('POST', '/api/events', data);
     const result = await processApiResponse(response);

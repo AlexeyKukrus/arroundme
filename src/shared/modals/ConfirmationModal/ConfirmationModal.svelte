@@ -1,6 +1,7 @@
 <script lang="ts">
-	// ConfirmationModal
-	import { createEventDispatcher } from 'svelte';
+	// ConfirmationModal.svelte
+	import { browser } from '$app/environment';
+	import { createEventDispatcher, onDestroy } from 'svelte';
 
 	export let isOpen = false;
 	export let config: {
@@ -33,21 +34,32 @@
 		}
 	};
 
-	$: {
+	let keydownAttached = false;
+
+	$: if (browser) {
 		if (isOpen) {
 			document.body.style.overflow = 'hidden';
-
-			if (typeof window !== 'undefined') {
+			if (!keydownAttached) {
 				window.addEventListener('keydown', handleKeydown);
+				keydownAttached = true;
 			}
 		} else {
 			document.body.style.overflow = '';
-
-			if (typeof window !== 'undefined') {
+			if (keydownAttached) {
 				window.removeEventListener('keydown', handleKeydown);
+				keydownAttached = false;
 			}
 		}
 	}
+
+	onDestroy(() => {
+		if (!browser) return;
+		document.body.style.overflow = '';
+		if (keydownAttached) {
+			window.removeEventListener('keydown', handleKeydown);
+			keydownAttached = false;
+		}
+	});
 </script>
 
 {#if isOpen && config}
@@ -197,3 +209,4 @@
 		}
 	}
 </style>
+

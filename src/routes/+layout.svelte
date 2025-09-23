@@ -2,8 +2,9 @@
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 
-import { isAuthenticated, showAuthModal } from '@app/models/auth/store';
-import { user } from '@app/models/users/store';
+	import { isAuthenticated, showAuthModal } from '@app/models/auth/store';
+	import { user } from '@app/models/users/store';
+
 	import { Notifications, Header } from '@shared/ui';
 	import { AuthFormModal } from '@shared/modals';
 	

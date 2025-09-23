@@ -1,8 +1,9 @@
 <script lang="ts">
-	// EventsMap
+	// EventsMap.svelte
 	import { PUBLIC_YANDEX_MAPS_API_KEY } from '$env/static/public';
 	import { createEventDispatcher, onMount } from 'svelte';
 	import type { Event } from '@app/models/events/types';
+	import { parseCoordinates } from '@helpers/helpers';
 
 	export let events: Event[] = [];
 
@@ -18,15 +19,11 @@
 	let map: any = null;
 	let ym: any = null;
 	let eventPlacemarks: any[] = [];
+	let userPlacemark: any = null;
 
-	function parseCoordinates(coordString: string): [number, number] | null {
-		if (!coordString) return null;
-		const coords = coordString.split('|').map(Number);
-		if (coords.length !== 2 || coords.some(isNaN)) return null;
-		return [coords[0], coords[1]];
-	}
 
-	const loadYmaps = () => {
+
+	function loadYmaps() {
 		if (window.ymaps) return Promise.resolve(window.ymaps);
 		return new Promise((resolve, reject) => {
 			if (window.ymapsLoading) {
@@ -38,6 +35,7 @@
 				}, 100);
 				return;
 			}
+
 			window.ymapsLoading = true;
 			const script = document.createElement('script');
 			script.src = `https://api-maps.yandex.ru/2.1/?apikey=${PUBLIC_YANDEX_MAPS_API_KEY}&lang=ru_RU`;
@@ -88,25 +86,97 @@
 		window.ymaps.ready(() => {
 			ym = window.ymaps;
 			map = new ym.Map(mapContainer, {
-				center: [55.751244, 37.618423],
+				center: [55.751244, 37.618423], // Москва
 				zoom: 10,
 				controls: ['zoomControl']
 			});
+
 			renderEventMarkers(events);
-			const emitBounds = () => {
+
+			const emitBounds:() => void = () => {
 				try {
 					const bounds = map.getBounds();
 					const center = map.getCenter();
 					const zoom = map.getZoom();
 					dispatch('boundsChange', { bounds, center, zoom });
 				} catch {}
-			};
-			map.events.add('boundschange', () => emitBounds());
+			}
+
+			map.events.add('boundschange', () => {
+				emitBounds();
+			});
+
+			function placeUser(coords: [number, number], source: string) {
+				console.log(`Моя геопозиция (${source}) [lat, lon]:`, coords);
+				try {
+					map.setCenter(coords, 12);
+					userPlacemark = new ym.Placemark(
+						coords,
+						{ hintContent: 'Вы здесь' },
+						{ preset: 'islands#blueCircleIcon' }
+					);
+					map.geoObjects.add(userPlacemark);
+					setTimeout(emitBounds, 0);
+				} catch (e) {
+					console.warn('Не удалось центрировать карту по геопозиции:', e);
+				}
+			}
+
+			if (navigator && navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(
+					(position) => {
+						const userCoords: [number, number] = [
+							position.coords.latitude,
+							position.coords.longitude
+						];
+						console.log('Точность браузера (метры):', position.coords.accuracy);
+						placeUser(userCoords, 'browser');
+					},
+					(error) => {
+						console.warn('Не удалось получить геопозицию через браузер:', error);
+						// fallback на Yandex geolocation
+						if (ym.geolocation && ym.geolocation.get) {
+							// сначала пытаемся через провайдера browser, затем yandex
+							ym.geolocation
+								.get({ provider: 'browser', mapStateAutoApply: false })
+								.then((res: any) => {
+									const coords = res.geoObjects.get(0).geometry.getCoordinates();
+									placeUser(coords, 'ym-browser');
+								})
+								.catch(() => {
+									return ym.geolocation.get({ provider: 'yandex', mapStateAutoApply: false }).then((res: any) => {
+										const coords = res.geoObjects.get(0).geometry.getCoordinates();
+										placeUser(coords, 'ym-yandex');
+									});
+								});
+						}
+					},
+					{ enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+				);
+			} else if (ym.geolocation && ym.geolocation.get) {
+				ym.geolocation
+					.get({ provider: 'browser', mapStateAutoApply: false })
+					.then((res: any) => {
+						const coords = res.geoObjects.get(0).geometry.getCoordinates();
+						placeUser(coords, 'ym-browser');
+					})
+					.catch(() => {
+						return ym.geolocation.get({ provider: 'yandex', mapStateAutoApply: false }).then((res: any) => {
+							const coords = res.geoObjects.get(0).geometry.getCoordinates();
+							placeUser(coords, 'ym-yandex');
+						});
+					});
+			} else {
+				console.warn('Геолокация не поддерживается этим браузером.');
+			}
+
 			setTimeout(emitBounds, 0);
 		});
 	}
 
-	$: if (map) renderEventMarkers(events);
+	$: if (map) {
+		renderEventMarkers(events);
+	}
 
 	onMount(async () => {
 		try {
@@ -119,5 +189,3 @@
 </script>
 
 <div bind:this={mapContainer} class="map"></div>
-
-

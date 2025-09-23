@@ -5,56 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b9df272-ac59-404d-baa7-da0e5b392159" name="Changes" comment="feat (ME-0010) events bug fixes + add CRUD for user">
-      <change afterPath="$PROJECT_DIR$/src/modules/events/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/shared/modals/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/shared/ui/Button/Button.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/shared/ui/Header/Header.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/shared/ui/Title/Title.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/primitive/ActionButton.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/primitive/FormField.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/ui/FormField/FormField.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/primitive/Select.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/ui/Select/Select.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/AuthFormModal/AuthFormModal.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/ConfirmationModal/ConfirmationModal.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/modals/ConfirmationModal/ConfirmationModal.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/ConfirmationModal/helpers/helpers-options.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/modals/ConfirmationModal/helpers/helpers-options.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/EventFormPage/EventFormPage.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/EventFormPage/components/EventForm.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/EventFormPage/helpers/helpers-options.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/EventViewPage/EventViewPage.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/EventsListPage/EventsListPage.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/EventsListPage/components/EventCard.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/EventsListPage/components/EventsMap.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/MapModal/MapModal.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/Navigation/components/AvatarMenu.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/Navigation/components/DesktopNavigation.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/Navigation/components/MobileNavigation.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/Navigation/helpers/helper-options.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/Navigation/modals/MobileDrawerModal.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/Notifications/NotificationToast.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/Notifications/NotificationsContainer.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/api-response-helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/fetch/api-response-helpers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/fetch.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/fetch/fetch.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/server-fetch.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/fetch/server-fetch.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/validation-helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/fetch/validation-helpers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/stores/auth.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/stores/notifications.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/stores/user.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/types/event.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/types/yandex-maps.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/events/EventsList/EventsList.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/events/EventsList/EventsList.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/events/components/EventsMap.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/events/components/EventsMap.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/api/events/+server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/events/+server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/api/events/[id]/+server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/events/[id]/+server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/api/events/[id]/methods.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/events/[id]/methods.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/api/events/categories/+server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/events/categories/+server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/api/events/categories/methods.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/events/categories/methods.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/api/events/methods.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/events/methods.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/api/geocode/methods.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/geocode/methods.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/event/[id]/edit/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/event/[id]/edit/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/event/[id]/view/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/event/[id]/view/+page.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/event/create/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/event/create/+page.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/events/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/events/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/profile/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/profile/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/profile/edit/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/profile/edit/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/svelte.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/svelte.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/ui/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/ui/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +35,7 @@
         <option value="NotificationToast" />
         <option value="TypeScript File" />
         <option value="DesktopNavigation" />
+        <option value="Title" />
       </list>
     </option>
   </component>
@@ -159,7 +119,9 @@
       <workItem from="1755657374360" duration="12000" />
       <workItem from="1758437268502" duration="5000" />
       <workItem from="1758437291975" duration="3999000" />
-      <workItem from="1758554077684" duration="8301000" />
+      <workItem from="1758554077684" duration="8902000" />
+      <workItem from="1758605346990" duration="228000" />
+      <workItem from="1758606859465" duration="2941000" />
     </task>
     <task id="LOCAL-00001" summary="feat (ME-0010) events bug fixes + add CRUD for user">
       <option name="closed" value="true" />
@@ -196,7 +158,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/modules/events/components/EventForm.svelte</url>
           <line>1</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
