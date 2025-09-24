@@ -46,6 +46,7 @@
 				hasBounds = false;
 			}
 		} catch (error) {
+			console.log(error);
 			events = [];
 			filtered = [];
 			hasBounds = false;
@@ -57,7 +58,7 @@
 	onMount(() => {
 		getEventsList();
 		if (browser) {
-			const checkMobile = () => (isMobile = window.matchMedia('(max-width: 1376px)').matches);
+			const checkMobile = () => (isMobile = window.matchMedia('(max-width: 1200px)').matches);
 			checkMobile();
 			window.addEventListener('resize', checkMobile);
 			return () => window.removeEventListener('resize', checkMobile);

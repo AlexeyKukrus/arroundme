@@ -2,18 +2,19 @@
 	position: relative;
 	display: flex;
 	height: calc(100vh - 40px);
-	margin: 20px 0;
+	margin: var(--space-4) 0;
 }
 
-.map {
+.events-list-page > .map {
 	width: 50vw;
 	height: calc(100vh - 40px);
-	margin: 0 20px;
+	margin: 0 var(--space-4) 0 0; /* keep right spacing only */
 }
 
 .events-desktop-list {
-	width: 45%;
-	padding: 0 20px;
+	flex: 1 1 auto; /* take remaining space next to 50vw map */
+	min-width: 0; /* prevent overflow from long content */
+	padding: 0 var(--space-4);
 	overflow-y: auto;
 }
 
@@ -23,10 +24,10 @@
 }
 
 .event-card {
-	border: 1px solid #000;
-	border-radius: 4px;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-sm);
 	display: flex;
-	background: white;
+	background: var(--color-white);
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	transition:
 		transform 0.2s ease,
@@ -34,7 +35,7 @@
 	/* Fixed height for consistent card sizes */
 	height: 180px;
 	overflow: hidden;
-	margin-bottom: 15px;
+	margin-bottom: var(--space-4);
 }
 
 .event-card:hover {
@@ -47,12 +48,12 @@
 	width: 250px;
 	height: 100%;
 	object-fit: cover;
-	border-radius: 4px 0 0 4px;
+	border-radius: var(--radius-sm) 0 0 var(--radius-sm);
 	flex-shrink: 0;
 }
 
 .event-card-content {
-	padding: 15px;
+	padding: var(--space-4);
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
@@ -60,7 +61,7 @@
 }
 
 .event-card h3 {
-	margin: 0 0 5px 0;
+	margin: 0 0 var(--space-1) 0;
 	font-size: 1rem;
 	/* Keep title to one line */
 	white-space: nowrap;
@@ -69,16 +70,16 @@
 }
 
 .event-date {
-	color: #666;
+	color: var(--color-gray-600);
 	font-size: 0.8rem;
-	margin-bottom: 5px;
+	margin-bottom: var(--space-1);
 	flex-shrink: 0;
 }
 
 .event-location {
 	font-size: 0.9rem;
 	color: #444;
-	margin-bottom: 10px;
+	margin-bottom: var(--space-2);
 	/* Single-line ellipsis for address */
 	white-space: nowrap;
 	overflow: hidden;
@@ -87,7 +88,7 @@
 
 .event-description {
 	margin: 0;
-	color: #333;
+	color: var(--color-gray-900);
 	font-size: 0.95rem;
 	line-height: 1.4;
 	/* Clamp description to 3 lines */
@@ -103,10 +104,10 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	font-size: 1.2rem;
-	color: #666;
+	color: var(--color-gray-600);
 }
 
-@media (max-width: 1376px) {
+@media (max-width: 1200px) {
 	.events-list-page {
 		flex-direction: column;
 		height: auto;
@@ -114,7 +115,7 @@
 		margin: 0;
 	}
 
-	.map {
+	.events-list-page > .map {
 		width: 100%;
 		height: 50vh;
 		margin: 0;
@@ -125,33 +126,29 @@
 	}
 
 	.events-mobile-list {
-		position: fixed;
-		bottom: 0;
-		left: var(--sidebar-width);
-		right: 0;
-		height: 50vh;
-		background: white;
+		position: static;
+		bottom: auto;
+		left: auto;
+		right: auto;
+		height: auto;
+		background: var(--color-white);
 		border-top: 1px solid var(--color-gray-300);
-		box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-		width: calc(100vw - var(--sidebar-width));
-		z-index: 100;
-		padding: 15px;
+		box-shadow: none;
+		width: 100%;
+		z-index: auto;
+		padding: var(--space-4);
 		box-sizing: border-box;
-		overflow-y: auto;
-		transform: translateY(0);
-		transition: transform 0.3s ease;
-	}
-
-	.events-mobile-list.collapsed {
-		transform: translateY(calc(100% - 60px));
+		overflow: visible;
+		transform: none;
+		transition: none;
 	}
 
 	.mobile-list-header {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 10px 0;
-		margin-bottom: 10px;
+		padding: var(--space-2) 0;
+		margin-bottom: var(--space-2);
 		border-bottom: 1px solid #eee;
 	}
 
@@ -160,25 +157,6 @@
 		border: none;
 		font-size: 1.2rem;
 		cursor: pointer;
-	}
-}
-@media (max-width: 1024px) {
-	.events-mobile-list {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 50vh;
-		background: white;
-		border-top: 1px solid var(--color-gray-300);
-		box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-		z-index: 100;
-		padding: 15px;
-		box-sizing: border-box;
-		overflow-y: auto;
-		transform: translateY(0);
-		transition: transform 0.3s ease;
-		width: 100%;
 	}
 }
 

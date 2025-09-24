@@ -63,7 +63,14 @@
 </script>
 
 {#if isOpen && config}
-	<div class="modal-backdrop" on:click={handleBackdropClick} tabindex="0">
+	<div
+		class="modal-backdrop"
+		role="dialog"
+		aria-modal="true"
+		tabindex="-1"
+		on:click={handleBackdropClick}
+		on:keydown={handleKeydown}
+	>
 		<div class="modal-container">
 			<button class="close-button" on:click={closeModal} aria-label="Закрыть">
 				<svg
@@ -99,113 +106,3 @@
 		</div>
 	</div>
 {/if}
-
-<style>
-	.modal-backdrop {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.5);
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		z-index: 1000;
-		animation: fadeIn 0.2s ease-out;
-	}
-
-	.modal-container {
-		position: relative;
-		background: white;
-		border-radius: 12px;
-		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-		max-width: 500px;
-		width: 90%;
-		animation: slideIn 0.2s ease-out;
-	}
-
-	.close-button {
-		position: absolute;
-		top: 16px;
-		right: 16px;
-		background: none;
-		border: none;
-		cursor: pointer;
-		padding: 4px;
-		border-radius: 4px;
-		color: #6b7280;
-		transition:
-			color 0.2s,
-			background-color 0.2s;
-	}
-
-	.close-button:hover {
-		color: #374151;
-		background-color: #f3f4f6;
-	}
-
-	.modal-content {
-		padding: 32px;
-		padding-top: 40px;
-	}
-
-	.modal-title {
-		margin: 0 0 12px 0;
-		font-size: 20px;
-		font-weight: 600;
-		color: #111827;
-	}
-
-	.modal-description {
-		margin: 0 0 24px 0;
-		color: #6b7280;
-		line-height: 1.5;
-	}
-
-	.modal-actions {
-		display: flex;
-		justify-content: flex-end;
-		gap: 12px;
-	}
-
-	.confirm-button {
-		padding: 10px 16px;
-		border-radius: 6px;
-		font-weight: 500;
-		cursor: pointer;
-		transition:
-			background-color 0.2s,
-			color 0.2s;
-	}
-
-	.type-alert {
-		background-color: #ef4444;
-		border: none;
-		color: white;
-	}
-
-	.type-alert:hover {
-		background-color: #dc2626;
-	}
-
-	@keyframes fadeIn {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
-	}
-
-	@keyframes slideIn {
-		from {
-			opacity: 0;
-			transform: translateY(-20px) scale(0.95);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0) scale(1);
-		}
-	}
-</style>

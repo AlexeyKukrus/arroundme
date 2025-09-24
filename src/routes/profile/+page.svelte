@@ -17,7 +17,7 @@
 	const toEdit = () => goto('/profile/edit');
 </script>
 
-<section class="profile">
+<section class="profile container-narrow">
 	{#if current}
 		<Title size="lg" text="Профиль пользователя" />
 		<UsersView user={current} {formatDate}>
@@ -26,35 +26,4 @@
 	{:else}
 		<p>Пользователь не найден.</p>
 	{/if}
-	<style>
-		.profile {
-			max-width: 720px;
-			margin: 2rem auto;
-			padding: 0 1rem;
-		}
-		.title {
-			margin-bottom: 1rem;
-		}
-		.card {
-			border: 1px solid var(--color-border);
-			border-radius: 8px;
-			padding: 1rem;
-		}
-		.row {
-			display: flex;
-			gap: 0.5rem;
-			padding: 0.5rem 0;
-		}
-		.label {
-			width: 120px;
-			color: var(--color-text);
-			opacity: 0.7;
-		}
-		.value {
-			flex: 1;
-		}
-		.actions {
-			margin-top: 1rem;
-		}
-	</style>
 </section>

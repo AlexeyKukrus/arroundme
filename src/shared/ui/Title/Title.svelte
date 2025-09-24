@@ -14,23 +14,3 @@
 <svelte:element this={Tag} class={`title title-${size}`}>
 	<slot>{text}</slot>
 </svelte:element>
-
-<style>
-	.title {
-		margin: 0;
-		font-weight: 700;
-		line-height: 1.2;
-	}
-
-	.title-lg {
-		font-size: 32px;
-	}
-
-	.title-md {
-		font-size: 24px;
-	}
-
-	.title-s {
-		font-size: 18px;
-	}
-</style>

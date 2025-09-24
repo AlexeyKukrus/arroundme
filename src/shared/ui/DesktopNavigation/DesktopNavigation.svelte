@@ -22,6 +22,6 @@
 		{/if}
 	{/each}
 
-	<div style="margin-top:auto"></div>
+	<div class="spacer"></div>
 	<AvatarMenu />
 </nav>

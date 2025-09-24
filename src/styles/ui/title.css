@@ -1,0 +1,17 @@
+.title {
+	margin: 0;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.title-lg {
+	font-size: var(--text-lg);
+}
+
+.title-md {
+	font-size: var(--text-md);
+}
+
+.title-s {
+	font-size: var(--text-s);
+}
