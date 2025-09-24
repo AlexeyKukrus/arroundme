@@ -12,6 +12,17 @@ export const fetchFromClient = async (
 	url: string,
 	data?: unknown | FormData
 ): Promise<Response> => {
+	// TODO: ДЛЯ РАБОТЫ МОК СЕРВЕРА РАССКОМЕНТИРОВАТЬ ЭТОТ КОД. ПОСЛЕ ЗАПУСКА ОСНОВНОГО СЕРВЕРА - УДАЛИТЬ
+	// ------------------------------------------------------------------------------------------------
+	// const BASE_URL = (import.meta as any).env?.VITE_API_BASE_URL || '';
+	// const buildUrl = (base: string, path: string) => {
+	// 	if (!base) return path;
+	// 	if (!path) return base;
+	// 	const normalizedBase = base.replace(/\/+$/, '');
+	// 	const normalizedPath = path.replace(/^\/+/, '');
+	// 	return `${normalizedBase}/${normalizedPath}`;
+	// };
+	// ------------------------------------------------------------------------------------------------
 	const config: FetchConfig = {
 		method,
 		headers: {}
@@ -23,9 +34,35 @@ export const fetchFromClient = async (
 		config.headers['Content-Type'] = 'application/json';
 		config.body = JSON.stringify(data);
 	}
+	// ------------------------------------------------------------------------------------------------
+	const response = await fetch(url, config)
+	// ------------------------------------------------------------------------------------------------
+	// Для геокода оставляем реальный backend-прокси на Яндекс
+	// if (url.startsWith('/api/geocode')) {
+	// 	const response = await fetch(url, config);
+	// 	if (!response.ok) {
+	// 		let errorMessage = `Ошибка ответа сервера: ${response.status}`;
+	// 		try {
+	// 			const errorBody = await response.clone().json();
+	// 			if (Array.isArray(errorBody)) {
+	// 				const formattedMessages = errorBody
+	// 					.map(
+	// 						(err: { name?: string; message?: string }, index: number) =>
+	// 							`${index + 1}. ${err.name}: ${err.message}`
+	// 					)
+	// 					.join('\n');
+	// 				errorMessage += `\n${formattedMessages}\n`;
+	// 			} else if (errorBody?.message) {
+	// 				errorMessage += ` – ${errorBody.name}: ${errorBody.message}\n`;
+	// 			}
+	// 		} catch {}
+	// 		throw new HttpError(response.status, errorMessage);
+	// 	}
+	// 	return response;
+	// }
 
-	const response = await fetch(url, config);
-
+	// const response = await fetch(buildUrl(BASE_URL, url), config);
+	// ------------------------------------------------------------------------------------------------
 	if (!response.ok) {
 		let errorMessage = `Ошибка ответа сервера: ${response.status}`;
 		try {

@@ -1,0 +1,56 @@
+.avatar-menu {
+	position: relative;
+	display: inline-block;
+}
+
+.avatar-button {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	overflow: hidden;
+	background: transparent;
+	padding: 0;
+	border: none;
+}
+
+.avatar-image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.avatar-menu .menu {
+	position: absolute;
+	right: 0;
+	top: calc(100% + 8px);
+	min-width: 220px;
+	background: var(--color-white);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+	padding: var(--space-2);
+	z-index: 200;
+}
+
+.avatar-menu .menu-item {
+	width: 100%;
+	text-align: left;
+	padding: var(--space-2) var(--space-3);
+	border-radius: var(--radius-sm);
+	color: var(--color-text);
+}
+
+.avatar-menu .menu-item:hover {
+	background: var(--color-border);
+}
+
+.avatar-menu .menu-item.danger {
+	color: #b00020;
+}
+
+.avatar-menu .separator {
+	height: 1px;
+	background: var(--color-border);
+	margin: var(--space-2) 0;
+}

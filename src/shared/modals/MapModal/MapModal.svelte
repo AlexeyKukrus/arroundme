@@ -242,8 +242,8 @@
 </script>
 
 {#if isOpen}
-	<div class="modal-overlay" on:click|self={handleClose}>
-		<div class="modal">
+	<div class="modal-overlay" role="dialog" aria-modal="true" on:click|self={handleClose}>
+		<div class="modal" role="document">
 			<button class="close-button" on:click={handleClose} title="Закрыть"> × </button>
 
 			{#if error}

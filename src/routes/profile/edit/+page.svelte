@@ -13,27 +13,7 @@
 	};
 </script>
 
-<section class="edit-profile">
+<section class="edit-profile container-narrow">
 	<Title size="lg" text="Редактирование пользователя" />
 	<UsersForm {name} on:submitForm={handleSubmitForm} on:cancel={() => goto('/profile')} />
-
-	<style>
-		.edit-profile {
-			max-width: 720px;
-			margin: 2rem auto;
-			padding: 0 1rem;
-		}
-		.title {
-			margin-bottom: 1rem;
-		}
-		.form {
-			border: 1px solid var(--color-border);
-			border-radius: 8px;
-			padding: 1rem;
-		}
-		.actions {
-			display: flex;
-			gap: 0.5rem;
-		}
-	</style>
 </section>

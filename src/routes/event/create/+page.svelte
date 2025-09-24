@@ -61,7 +61,7 @@
 	});
 </script>
 
-<div class="create-event-page">
+<div class="create-event-page container-form">
 	<Title size="lg" text="Создать событие" />
 	<EventForm
 		{categories}
@@ -76,11 +76,3 @@
 	onClose={() => (isMapModalOpen = false)}
 	onCoordinatesSelect={getAddressByCoords}
 />
-
-<style>
-	.create-event-page {
-		max-width: 600px;
-		margin: 0 auto;
-		padding: 2rem;
-	}
-</style>

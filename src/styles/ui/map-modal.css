@@ -1,0 +1,113 @@
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(2px);
+	-webkit-backdrop-filter: blur(2px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1200;
+}
+
+.modal {
+	background: var(--color-white);
+	border-radius: var(--radius-md);
+	width: min(900px, 90vw);
+	max-height: 90vh;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	position: relative;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+	position: absolute;
+	top: var(--space-2);
+	right: var(--space-2);
+	background: none;
+	border: none;
+	padding: var(--space-1);
+	border-radius: var(--radius-sm);
+	color: var(--color-gray-600);
+	cursor: pointer;
+	transition:
+		background-color 0.2s ease,
+		color 0.2s ease;
+}
+.close-button:hover {
+	background-color: var(--color-gray-100);
+	color: var(--color-gray-900);
+}
+
+.modal-content {
+	padding: var(--space-4);
+	padding-top: calc(var(--space-4) + 6px);
+}
+
+/* Map area should be constrained within the modal */
+.modal .map {
+	width: 100%;
+	height: clamp(300px, 60vh, 700px);
+	border-radius: var(--radius-sm);
+	overflow: hidden;
+}
+
+.info-panel {
+	margin: var(--space-3) var(--space-4) 0 var(--space-4);
+	padding: var(--space-3);
+	border-radius: var(--radius-sm);
+	border: 1px solid var(--color-border);
+	background: var(--color-gray-100);
+}
+.error-panel {
+	border-color: var(--color-error);
+}
+
+.loading-panel {
+	text-align: center;
+}
+
+.spinner {
+	width: 28px;
+	height: 28px;
+	border: 3px solid var(--color-gray-100);
+	border-top-color: var(--color-primary);
+	border-radius: 50%;
+	margin: 0 auto var(--space-2);
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.hint-panel {
+	color: var(--color-gray-600);
+}
+
+.select-panel {
+	border-top: 1px solid var(--color-border);
+	padding: var(--space-3) var(--space-4);
+	display: flex;
+	justify-content: flex-end;
+}
+
+.select-button {
+	background: var(--color-primary);
+	color: var(--color-white);
+	border: none;
+	padding: var(--space-2) var(--space-3);
+	border-radius: var(--radius-sm);
+	cursor: pointer;
+	transition: background 0.2s ease;
+}
+.select-button:hover {
+	background: color-mix(in srgb, var(--color-primary) 80%, black 20%);
+}

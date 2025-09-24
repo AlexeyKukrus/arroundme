@@ -5,8 +5,20 @@
 @import './styles/layout/event-view.css';
 @import './styles/layout/event-form.css';
 
+/* UI component styles */
+@import './styles/ui/button.css';
+@import './styles/ui/form-field.css';
+@import './styles/ui/select.css';
+@import './styles/ui/title.css';
+@import './styles/ui/notifications.css';
+@import './styles/ui/avatar-menu.css';
+@import './styles/ui/desktop-navigation.css';
+@import './styles/ui/confirmation-modal.css';
+@import './styles/ui/map-modal.css';
+
 @import './styles/variables/colors.css';
 @import './styles/variables/margin.css';
+@import './styles/utilities.css';
 
 * {
 	box-sizing: border-box;

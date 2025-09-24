@@ -38,6 +38,10 @@
 	let selectedEventCategoryId: string = '';
 	let formErrors: Record<string, string> = {};
 
+	const eventTypeOptions: Array<{ value: string; label: string }> = Object.entries(
+		eventTypesDataOptions
+	).map(([value, item]) => ({ value, label: (item as { name: string }).name }));
+
 	$: {
 		if (data.name !== undefined) selectedEventName = data.name || '';
 		if (data.description !== undefined) selectedEventDescription = data.description || '';
@@ -193,7 +197,7 @@
 	{#if formErrors.scheduledFor}<div class="error-message">{formErrors.scheduledFor}</div>{/if}
 
 	<Select
-		options={eventTypesDataOptions}
+		options={eventTypeOptions}
 		selected={selectedEventType ? [selectedEventType] : []}
 		placeholder="Выберите тип события"
 		on:change={changeEventType}
